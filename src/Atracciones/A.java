@@ -6,33 +6,16 @@ import Personal.ResponsablesDeAtraccion;
 import java.util.ArrayList;
 
 
-public class A implements Atraccion {
-
+public class A extends Atraccion {
     static final int numeroDeAyudantesDeAtraccion = 6;
-    static final int numeroDeResponsablesDeAtraccion = 6;
-    private ArrayList<AyudantesDeAtraccion> Ayudantes = new ArrayList<>(6);
-    private ResponsablesDeAtraccion Responsable;
-    private String nombre;
-    private int numeroAtraccion;
-    private static int siguientenumero;
+    static final int numeroDeResponsablesDeAtraccion = 1;
 
-    public A(ResponsablesDeAtraccion Responsable) {
-        this.Responsable = Responsable;
+    /*public A(ResponsablesDeAtraccion Responsable) {
+        super();
+
         numeroAtraccion = siguientenumero;
         Responsable.setNumeroDeAtraccion(numeroAtraccion);
         Responsable.setTipoAtraccion("A");
         siguientenumero++;
-    }
-
-    @Override
-    public void desactivar() {
-
-    }
-
-    @Override
-    public void activar() {
-
-    }
-
-
+    }*/
 }

@@ -1,12 +1,12 @@
 package Personal;
 
 public abstract class Empleado {
-    public String Nombre;
-    public int Sueldo;
-    public int numeroDNI;
-    public char letraDNI;
+    private String Nombre;
+    private int Sueldo;
+    private int numeroDNI;
+    private char letraDNI;
 
-    public Empleado(String Nombre, int sueldo, int DNI, char letradni) {
+    Empleado(String Nombre, int sueldo, int DNI, char letradni) {
         super();
         this.Sueldo = sueldo;
         this.Nombre = Nombre;
