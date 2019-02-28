@@ -10,12 +10,8 @@ public class A extends Atraccion {
     static final int numeroDeAyudantesDeAtraccion = 6;
     static final int numeroDeResponsablesDeAtraccion = 1;
 
-    /*public A(ResponsablesDeAtraccion Responsable) {
-        super();
+    @Override
+    ArrayList LlenarAtraccion() {
 
-        numeroAtraccion = siguientenumero;
-        Responsable.setNumeroDeAtraccion(numeroAtraccion);
-        Responsable.setTipoAtraccion("A");
-        siguientenumero++;
-    }*/
+    }
 }
