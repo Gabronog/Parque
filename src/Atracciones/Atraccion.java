@@ -5,7 +5,7 @@ import Personal.Responsables;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Atraccion {
+abstract class Atraccion {
     /**
      * Clase base para el resto de Atracciones
      * Creada por Gabriel Noguerales
@@ -33,7 +33,7 @@ public abstract class Atraccion {
     }
 */
 
-    public Atraccion(int TipoDeAtraccion, Responsables responsable) {
+    Atraccion(int TipoDeAtraccion, Responsables responsable) {
         numeroAtraccion = siguientenumero;
         siguientenumero++;
         Ayudantes = new ArrayList<>();
@@ -42,7 +42,7 @@ public abstract class Atraccion {
     }
 
 
-    public Atraccion(int TipoDeAtraccion,String nombre,int sueldo,int DNI,char letra){
+    Atraccion(int TipoDeAtraccion, String nombre, int sueldo, int DNI, char letra) {
         numeroAtraccion = siguientenumero;
         siguientenumero++;
         Ayudantes = new ArrayList<>();

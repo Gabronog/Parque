@@ -14,8 +14,8 @@ public class A extends Atraccion {
      * Creado por Gabriel Noguerales
      */
 
-    static final int numeroDeAyudantesDeAtraccion = 6;
-    static final int TipoDeAtraccion = 0;
+    private static final int nAyudantes = 6;
+    private static final int TipoDeAtraccion = 1;
 
     public A(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5, Ayudantes A6) {
         super(TipoDeAtraccion, responsable);
@@ -31,7 +31,7 @@ public class A extends Atraccion {
 
     public A(Responsables responsable, List<Personal.Ayudantes> Ayudantes) {
         super(TipoDeAtraccion, responsable);
-        if (numeroDeAyudantesDeAtraccion == Ayudantes.size()) {
+        if (nAyudantes == Ayudantes.size()) {
             this.Ayudantes = Ayudantes;
             LlenarAyudantes();
             this.activada = true;
@@ -50,7 +50,7 @@ public class A extends Atraccion {
 
     public A(String nombre, int sueldo, int DNI, char letra, List<Personal.Ayudantes> Ayudantes) {
         super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
-        if (numeroDeAyudantesDeAtraccion == Ayudantes.size()) {
+        if (nAyudantes == Ayudantes.size()) {
             this.Ayudantes = Ayudantes;
             LlenarAyudantes();
             this.activada = true;
@@ -59,7 +59,7 @@ public class A extends Atraccion {
     }
 
     private void LlenarAyudantes() {
-        for (int i = 0; i < numeroDeAyudantesDeAtraccion; i++) {
+        for (int i = 0; i < nAyudantes; i++) {
             this.Ayudantes.get(i).setNumeroDeAtraccion(this.numeroAtraccion);
             this.Ayudantes.get(i).setTipoAtraccion(TipoDeAtraccion);
         }

@@ -7,17 +7,17 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class B extends Atraccion {
+public class D extends Atraccion {
     /**
-     * Atraccion Tipo B
+     * Atraccion Tipo C
      * Extiende Atraccion
      * Creado por Gabriel Noguerales
      */
 
     private static final int nAyudantes = 5;
-    private static final int TipoDeAtraccion = 2;
+    private static final int TipoDeAtraccion = 4;
 
-    public B(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
+    public D(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
         super(TipoDeAtraccion, responsable);
         //Comprobamos que todos los ayudantes tienen datos
         if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null) {
@@ -29,7 +29,7 @@ public class B extends Atraccion {
         }
     }
 
-    public B(Responsables responsable, List<Personal.Ayudantes> Ayudantes) {
+    public D(Responsables responsable, List<Personal.Ayudantes> Ayudantes) {
         super(TipoDeAtraccion, responsable);
         if (nAyudantes == Ayudantes.size()) {
             this.Ayudantes = Ayudantes;
@@ -39,7 +39,7 @@ public class B extends Atraccion {
 
     }
 
-    public B(String nombre, int sueldo, int DNI, char letra, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
+    public D(String nombre, int sueldo, int DNI, char letra, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
         super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
         if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null) {
             Ayudantes = Arrays.asList(A1, A2, A3, A4, A5);
@@ -48,7 +48,7 @@ public class B extends Atraccion {
         }
     }
 
-    public B(String nombre, int sueldo, int DNI, char letra, List<Personal.Ayudantes> Ayudantes) {
+    public D(String nombre, int sueldo, int DNI, char letra, List<Personal.Ayudantes> Ayudantes) {
         super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
         if (nAyudantes == Ayudantes.size()) {
             this.Ayudantes = Ayudantes;
@@ -66,7 +66,7 @@ public class B extends Atraccion {
     }
 
 
-    public B(String nombre, int sueldo, int DNI, char letra) {
+    public D(String nombre, int sueldo, int DNI, char letra) {
         super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
     }
 
