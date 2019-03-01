@@ -1,18 +1,22 @@
 package Atracciones;
 
-import Personal.AyudantesDeAtraccion;
-import Personal.ResponsablesDeAtraccion;
+import Personal.Responsables;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Atraccion {
-    private boolean activada;
-    private ArrayList<AyudantesDeAtraccion> Ayudantes;
-    private ResponsablesDeAtraccion Responsable;
-    private int numeroAtraccion;
+    /**
+     * Clase base para el resto de Atracciones
+     * Creada por Gabriel Noguerales
+     */
+    boolean activada;
+    List<Personal.Ayudantes> Ayudantes;
+    private Responsables Responsable;
+    int numeroAtraccion;
     private static int siguientenumero;
 
-    private int calcularAyudantes(int TipoDeAtraccion){
+/*    private int calcularAyudantes(int TipoDeAtraccion){
         switch(TipoDeAtraccion){
             case 1: return 6;
             case 2: return 5;
@@ -27,33 +31,33 @@ public abstract class Atraccion {
         System.exit(-1);
         return -1;
     }
+*/
 
-    public Atraccion(int TipoDeAtraccion,ResponsablesDeAtraccion responsable){
-        int aux1 = 0;
+    public Atraccion(int TipoDeAtraccion, Responsables responsable) {
         numeroAtraccion = siguientenumero;
         siguientenumero++;
-        aux1 = calcularAyudantes(TipoDeAtraccion);
-            Ayudantes = new ArrayList<>(aux1);
+        Ayudantes = new ArrayList<>();
             this.Responsable = responsable;
             comun(Responsable,TipoDeAtraccion,numeroAtraccion);
     }
 
+
     public Atraccion(int TipoDeAtraccion,String nombre,int sueldo,int DNI,char letra){
-        int aux1 = 0;
         numeroAtraccion = siguientenumero;
         siguientenumero++;
-        aux1 = calcularAyudantes(TipoDeAtraccion);
-            Ayudantes = new ArrayList<>(aux1);
-            Responsable = new ResponsablesDeAtraccion(nombre,sueldo,DNI,letra);
+        Ayudantes = new ArrayList<>();
+        Responsable = new Responsables(nombre, sueldo, DNI, letra);
             comun(Responsable,TipoDeAtraccion,numeroAtraccion);
     }
-    //TODO public Atraccion(int TipoDeAtraccion)
-    private void comun(ResponsablesDeAtraccion Responsable,int TipoDeAtraccion,int numeroAtraccion){
-        Responsable.setTipoAtraccion(TipoDeAtraccion);
-        Responsable.setNumeroDeAtraccion(numeroAtraccion);
+
+
+    private void comun(Responsables Responsable, int TipoDeAtraccion, int numeroAtraccion) {
+        if (null != Responsable) {
+            Responsable.setTipoAtraccion(TipoDeAtraccion);
+            Responsable.setNumeroDeAtraccion(numeroAtraccion);
+        }
     }
 
-    abstract ArrayList LlenarAtraccion();
 
     //TODO abstract void desactivar(); .
     //TODO abstract void activar();
