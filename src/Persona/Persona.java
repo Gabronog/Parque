@@ -1,17 +1,19 @@
 package Persona;
 
+import java.io.Serializable;
+
 import static Persona.TipoPersona.*;
 
-public class Persona {
+public class Persona implements Serializable {
     private int Edad;
     private String Nombre;
     private int Altura;
     private int CarnetDeDescuento;
-    TipoPersona Tipopersona;
+    private TipoPersona Tipopersona;
     private boolean Discapacitado;
 
 
-    public Persona(String Nombre, int Edad, int Altura) {
+    Persona(String Nombre, int Edad, int Altura) {
         this.Nombre = Nombre;
         this.Altura = Altura;
         this.Edad = Edad;
