@@ -1,6 +1,8 @@
 package Personal;
 
-enum Departamento {
+import java.io.Serializable;
+
+enum Departamento implements Serializable {
     atencionAlCliente,
     relacionesPublicas,
     responsableDeAtraccion,

@@ -3,11 +3,12 @@ package Atracciones;
 import Personal.Ayudantes;
 import Personal.Responsables;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class A extends Atraccion {
+public class A extends Atraccion implements Serializable {
     /**
      * Atraccion Tipo A
      * Extiende Atraccion

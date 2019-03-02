@@ -1,6 +1,8 @@
 package Personal;
 
-public class Relaciones extends Empleado {
+import java.io.Serializable;
+
+public class Relaciones extends Empleado implements Serializable {
     /**
      * Clase para trabajadores del departamento de Relaciones publicas
      * Extiende la clase Empleado
@@ -8,8 +10,10 @@ public class Relaciones extends Empleado {
      * Creado por Gabriel Noguerales 1/3/2019
      */
 
-    Relaciones(String Nombre, int sueldo, int DNI, char letradni) {
-        super(Nombre, sueldo, DNI, letradni);
+    private final static int SUELDO = (int) (950 * 0.2);
+
+    Relaciones(String Nombre) {
+        super(Nombre, SUELDO);
     }
 
     public void Oferta(int numeroDeEntradas, int TipoEntrada, int Descuento) {

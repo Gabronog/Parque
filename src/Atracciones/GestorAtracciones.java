@@ -5,13 +5,13 @@ import java.util.LinkedList;
 
 public abstract class GestorAtracciones {
 
-    private static LinkedList<Atraccion> Atracciones = new LinkedList<>();
+    private static LinkedList<Object> Atracciones = new LinkedList<>();
 
     public static void NuevaAtraccion(Atraccion Atraccion) {
         Atracciones.add(Atraccion);
     }
 
-    public static Atraccion ObtenerDatos(int numeroAtraccion) {
+    public static Object ObtenerDatos(int numeroAtraccion) {
         return Atracciones.get(numeroAtraccion);
     }
 

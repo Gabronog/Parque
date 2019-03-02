@@ -1,6 +1,8 @@
 package Personal;
 
-public class Atencion extends Empleado {
+import java.io.Serializable;
+
+public class Atencion extends Empleado implements Serializable {
     /**
      * @param Nombre   Nombre del Trabajador
      * @param sueldo   Sueldo del Trabajador
@@ -10,6 +12,6 @@ public class Atencion extends Empleado {
 
 
     Atencion(String Nombre, int sueldo, int DNI, char letradni) {
-        super(Nombre, sueldo, DNI, letradni);
+        super(Nombre, sueldo);
     }
 }

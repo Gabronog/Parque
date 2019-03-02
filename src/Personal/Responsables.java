@@ -1,8 +1,10 @@
 package Personal;
 
-public class Responsables extends Ayudantes {
-    public Responsables(String Nombre, int DNI, char letradni) {
-        super(Nombre, DNI, letradni);
+import java.io.Serializable;
+
+public class Responsables extends Ayudantes implements Serializable {
+    public Responsables(String Nombre) {
+        super(Nombre);
         this.Sueldo = (int) (950 * 1.15);
     }
 }

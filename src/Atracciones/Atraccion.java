@@ -2,10 +2,11 @@ package Atracciones;
 
 import Personal.Responsables;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Atraccion {
+abstract class Atraccion implements Serializable {
     /**
      * Clase base para el resto de Atracciones
      * Creada por Gabriel Noguerales
@@ -29,7 +30,7 @@ abstract class Atraccion {
         numeroAtraccion = siguientenumero;
         siguientenumero++;
         Ayudantes = new ArrayList<>();
-        Responsable = new Responsables(nombre, DNI, letra);
+        Responsable = new Responsables(nombre);
             comun(Responsable,TipoDeAtraccion,numeroAtraccion);
     }
 
