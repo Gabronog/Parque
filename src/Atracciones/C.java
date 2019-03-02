@@ -16,6 +16,8 @@ public class C extends Atraccion {
 
     private static final int nAyudantes = 3;
     private static final int TipoDeAtraccion = 3;
+    private static final boolean VIP = false;
+
 
     public C(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3) {
         super(TipoDeAtraccion, responsable);
@@ -63,11 +65,6 @@ public class C extends Atraccion {
             this.Ayudantes.get(i).setNumeroDeAtraccion(this.numeroAtraccion);
             this.Ayudantes.get(i).setTipoAtraccion(TipoDeAtraccion);
         }
-    }
-
-
-    public C(String nombre, int sueldo, int DNI, char letra) {
-        super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
     }
 
 }

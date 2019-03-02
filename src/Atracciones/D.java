@@ -16,6 +16,8 @@ public class D extends Atraccion {
 
     private static final int nAyudantes = 5;
     private static final int TipoDeAtraccion = 4;
+    private static final boolean VIP = true;
+
 
     public D(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
         super(TipoDeAtraccion, responsable);
@@ -65,9 +67,5 @@ public class D extends Atraccion {
         }
     }
 
-
-    public D(String nombre, int sueldo, int DNI, char letra) {
-        super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
-    }
-
 }
+

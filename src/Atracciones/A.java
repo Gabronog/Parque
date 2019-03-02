@@ -16,6 +16,7 @@ public class A extends Atraccion {
 
     private static final int nAyudantes = 6;
     private static final int TipoDeAtraccion = 1;
+    private static final boolean VIP = true;
 
     public A(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5, Ayudantes A6) {
         super(TipoDeAtraccion, responsable);
@@ -64,10 +65,4 @@ public class A extends Atraccion {
             this.Ayudantes.get(i).setTipoAtraccion(TipoDeAtraccion);
         }
     }
-
-
-    public A(String nombre, int sueldo, int DNI, char letra) {
-        super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
-    }
-
 }

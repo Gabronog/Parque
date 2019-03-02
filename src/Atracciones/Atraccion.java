@@ -10,28 +10,11 @@ abstract class Atraccion {
      * Clase base para el resto de Atracciones
      * Creada por Gabriel Noguerales
      */
-    boolean activada;
-    List<Personal.Ayudantes> Ayudantes;
-    private Responsables Responsable;
-    int numeroAtraccion;
-    private static int siguientenumero;
-
-/*    private int calcularAyudantes(int TipoDeAtraccion){
-        switch(TipoDeAtraccion){
-            case 1: return 6;
-            case 2: return 5;
-            case 3: return 3;
-            case 4: return 5;
-            case 5: return 7;
-            default:
-                System.out.println("Se ha producido un error al intentar añadir la atraccion");
-                System.exit(-1);
-        }
-        System.out.println("Se ha producido un error al intentar añadir la atraccion");
-        System.exit(-1);
-        return -1;
-    }
-*/
+    boolean activada; //Controla si la atraccion esta abierta al publico o cerrada.
+    List<Personal.Ayudantes> Ayudantes; //Lista de ayudantes de la atraccion
+    private Responsables Responsable; //Responsable de la atraccion
+    int numeroAtraccion; //Numero de Atraccion
+    private static int siguientenumero; //Numero a asignar a la siguiente atraccion
 
     Atraccion(int TipoDeAtraccion, Responsables responsable) {
         numeroAtraccion = siguientenumero;
@@ -46,7 +29,7 @@ abstract class Atraccion {
         numeroAtraccion = siguientenumero;
         siguientenumero++;
         Ayudantes = new ArrayList<>();
-        Responsable = new Responsables(nombre, sueldo, DNI, letra);
+        Responsable = new Responsables(nombre, DNI, letra);
             comun(Responsable,TipoDeAtraccion,numeroAtraccion);
     }
 

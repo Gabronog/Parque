@@ -16,6 +16,8 @@ public class E extends Atraccion {
 
     private static final int nAyudantes = 3;
     private static final int TipoDeAtraccion = 3;
+    private static final boolean VIP = true;
+
 
     public E(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5, Ayudantes A6) {
         super(TipoDeAtraccion, responsable);
