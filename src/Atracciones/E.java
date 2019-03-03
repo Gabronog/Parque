@@ -16,7 +16,7 @@ public class E extends Atraccion implements Serializable {
      */
 
     private static final int nAyudantes = 3;
-    private static final int TipoDeAtraccion = 3;
+    private static final int TipoDeAtraccion = 5;
     private static final boolean VIP = true;
 
 

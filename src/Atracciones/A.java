@@ -4,8 +4,7 @@ import Personal.Ayudantes;
 import Personal.Responsables;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 
 public class A extends Atraccion implements Serializable {
@@ -23,47 +22,49 @@ public class A extends Atraccion implements Serializable {
         super(TipoDeAtraccion, responsable);
         //Comprobamos que todos los ayudantes tienen datos
         if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null && A6 != null) {
-            Ayudantes = Arrays.asList(A1, A2, A3, A4, A5, A6);
+            this.Ayudantes.put(A1.getDNI(), A1);
+            this.Ayudantes.put(A2.getDNI(), A2);
+            this.Ayudantes.put(A3.getDNI(), A3);
+            this.Ayudantes.put(A4.getDNI(), A4);
+            this.Ayudantes.put(A5.getDNI(), A5);
+            this.Ayudantes.put(A6.getDNI(), A6);
             //Asignamos la atraccion a cada Ayudante
-            LlenarAyudantes();
+            LlenarAyudantes(nAyudantes, TipoDeAtraccion);
             //Activamos la atraccion
             this.activada = true;
         }
     }
 
-    public A(Responsables responsable, List<Personal.Ayudantes> Ayudantes) {
+    public A(Responsables responsable, HashMap<Integer, Personal.Ayudantes> Ayudantes) {
         super(TipoDeAtraccion, responsable);
         if (nAyudantes == Ayudantes.size()) {
             this.Ayudantes = Ayudantes;
-            LlenarAyudantes();
+            LlenarAyudantes(nAyudantes, TipoDeAtraccion);
             this.activada = true;
         }
 
     }
 
-    public A(String nombre, int sueldo, int DNI, char letra, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5, Ayudantes A6) {
-        super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
+    public A(String nombre, int DNI, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5, Ayudantes A6) {
+        super(TipoDeAtraccion, nombre, DNI);
         if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null && A6 != null) {
-            Ayudantes = Arrays.asList(A1, A2, A3, A4, A5, A6);
-            LlenarAyudantes();
+            this.Ayudantes.put(A1.getDNI(), A1);
+            this.Ayudantes.put(A2.getDNI(), A2);
+            this.Ayudantes.put(A3.getDNI(), A3);
+            this.Ayudantes.put(A4.getDNI(), A4);
+            this.Ayudantes.put(A5.getDNI(), A5);
+            this.Ayudantes.put(A6.getDNI(), A6);
+            LlenarAyudantes(nAyudantes, TipoDeAtraccion);
             this.activada = true;
         }
     }
 
-    public A(String nombre, int sueldo, int DNI, char letra, List<Personal.Ayudantes> Ayudantes) {
-        super(TipoDeAtraccion, nombre, sueldo, DNI, letra);
+    public A(String nombre, int DNI, HashMap<Integer, Personal.Ayudantes> Ayudantes) {
+        super(TipoDeAtraccion, nombre, DNI);
         if (nAyudantes == Ayudantes.size()) {
             this.Ayudantes = Ayudantes;
-            LlenarAyudantes();
+            LlenarAyudantes(nAyudantes, TipoDeAtraccion);
             this.activada = true;
-        }
-
-    }
-
-    private void LlenarAyudantes() {
-        for (int i = 0; i < nAyudantes; i++) {
-            this.Ayudantes.get(i).setNumeroDeAtraccion(this.numeroAtraccion);
-            this.Ayudantes.get(i).setTipoAtraccion(TipoDeAtraccion);
         }
     }
 }
