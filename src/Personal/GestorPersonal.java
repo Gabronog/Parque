@@ -5,7 +5,7 @@ import io.IO;
 import java.util.HashMap;
 
 public abstract class GestorPersonal {
-    private static final String ARCHIVO = "empleados";
+    private static final String ARCHIVO = "DATA/Empleados";
     /**
      * Gestor de personal no asignado a una atraccion
      */
@@ -17,6 +17,10 @@ public abstract class GestorPersonal {
 
     public static boolean contiene(int DNI) {
         return Empleados.containsKey(DNI);
+    }
+
+    public static Empleado Obtener(int DNI) {
+        return Empleados.get(DNI);
     }
 
     public static void borrar(int DNI) {

@@ -47,6 +47,9 @@ public class Entrada {
                 default:
                     System.out.println("ERROR INDEXOUTOFRANGE TIPOPERSONA");
             }
+        } else {
+            System.out.println("ERROR NOT A VALID PERSON");
+            return -1;
         }
         if (persona.getCarnetDeDescuento() != -1) descuento += DESCUENTOCARNET;
         if (persona.isDiscapacitado()) descuento += DESCUENTODISCAPACITADO;

@@ -15,6 +15,7 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
 
     public Ayudantes(String Nombre, int DNI) {
         super(Nombre, SUELDO_AYUDANTE, DNI);
+        GestorPersonal.insertar(this);
     }
 
     public void Ascender() {

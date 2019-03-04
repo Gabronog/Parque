@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 
 public abstract class GestorUsuarios {
-    private final static String archivo = "clientes";
+    private final static String archivo = "DATA/Clientes";
     private static HashMap<Integer, Persona> Usuarios = new HashMap<Integer, Persona>();
 
     public static void MeterUsuario(int DNI, String Nombre, int Edad, int Altura) {

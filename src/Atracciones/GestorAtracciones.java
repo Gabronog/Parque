@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public abstract class GestorAtracciones {
 
-    private static final String ARCHIVO = "Atracciones.ser";
+    private static final String ARCHIVO = "DATA/Atracciones";
     private static LinkedList<Atraccion> Atracciones = new LinkedList<>();
 
     public static void EliminarAtraccion(int numeroAtraccion) {
