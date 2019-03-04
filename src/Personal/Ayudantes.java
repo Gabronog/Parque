@@ -12,10 +12,12 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
 
 
     private static final int SUELDO_AYUDANTE = 950;
+    private int numeroAyudantes;
 
     public Ayudantes(String Nombre, int DNI) {
         super(Nombre, SUELDO_AYUDANTE, DNI);
         GestorPersonal.insertar(this);
+        numeroAyudantes++;
     }
 
     public void Ascender() {
@@ -30,5 +32,8 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
             GestorPersonal.borrar(this.getDNI());
             GestorPersonal.insertar(R1);
         }
+        numeroAyudantes--;
     }
+
+
 }

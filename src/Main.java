@@ -5,11 +5,7 @@ import Personal.GestorPersonal;
 public class Main {
     public static void main(String[] args) {
         CargarDatos(); //Carga los datos serializados previamente de atracciones y clientes
-        //Ayudantes Ayudante = new Ayudantes("Pepe", 48226519);
-        //System.out.println(GestorPersonal.contiene(48226519));
-        //GestorUsuarios.MeterUsuario((Integer)48226519,"Pepe",19,180);
-        System.out.println(GestorPersonal.Obtener(48226519));
-        //Pepe.Ascender();
+
         //TODO GUI
 
         GuardarDatos(); //Guarda los datos de las atracciones y de los clientes

@@ -17,7 +17,7 @@ public abstract class Empleado implements Serializable {
 
     private String Nombre;
     private int DNI;
-    int Sueldo;
+    private int Sueldo;
 
     Empleado(String Nombre, int sueldo, int DNI) {
         super();

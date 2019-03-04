@@ -42,4 +42,5 @@ public abstract class TrabajadorDeAtraccion extends Empleado {
         this.setNumeroDeAtraccion(-1);
         GestorPersonal.insertar(this);
     }
+
 }

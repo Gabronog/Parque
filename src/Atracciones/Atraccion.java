@@ -54,18 +54,6 @@ public abstract class Atraccion implements Serializable {
         this.activada = false;
     }
 
-    void LlenarAyudantes(int nAyudantes, int TipoDeAtraccion) {
-        for (int i = 0; i < nAyudantes; i++) {
-            Personal.Ayudantes empleado = this.Ayudantes.get(i);
-            if (GestorPersonal.contiene(empleado.getDNI())) {
-                GestorPersonal.borrar(empleado.getDNI());
-            }
-            empleado.setNumeroDeAtraccion(this.numeroAtraccion);
-            empleado.setTipoAtraccion(TipoDeAtraccion);
-        }
-    }
-
-
     public void Activar(int nAyudantes) {
         if (Ayudantes.size() == nAyudantes && Responsable != null) {
             this.activada = true;
@@ -82,4 +70,16 @@ public abstract class Atraccion implements Serializable {
         GestorAtracciones.ObtenerDatos(trabajador.getNumeroDeAtraccion()).desactivar();
         Ayudantes.remove(trabajador.getDNI());
     }
+
+    void LlenarAyudantes(int nAyudantes, int TipoDeAtraccion) {
+        for (int i = 0; i < nAyudantes; i++) {
+            Personal.Ayudantes empleado = this.Ayudantes.get(i);
+            if (GestorPersonal.contiene(empleado.getDNI())) {
+                GestorPersonal.borrar(empleado.getDNI());
+            }
+            empleado.setNumeroDeAtraccion(this.numeroAtraccion);
+            empleado.setTipoAtraccion(TipoDeAtraccion);
+        }
+    }
+
 }
