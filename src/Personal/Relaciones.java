@@ -12,8 +12,8 @@ public class Relaciones extends Empleado implements Serializable {
 
     private final static int SUELDO = (int) (950 * 0.2);
 
-    Relaciones(String Nombre) {
-        super(Nombre, SUELDO);
+    Relaciones(String Nombre, int DNI) {
+        super(Nombre, SUELDO, DNI);
     }
 
     public void Oferta(int numeroDeEntradas, int TipoEntrada, int Descuento) {

@@ -3,17 +3,18 @@ package Atracciones;
 import Personal.Ayudantes;
 import Personal.GestorPersonal;
 import Personal.Responsables;
+import Personal.TrabajadorDeAtraccion;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
-abstract class Atraccion implements Serializable {
+public abstract class Atraccion implements Serializable {
     /**
      * Clase base para el resto de Atracciones
      * Creada por Gabriel Noguerales
      */
     boolean activada; //Controla si la atraccion esta abierta al publico o cerrada.
-    public int numeroAtraccion; //Numero de Atraccion
+    private int numeroAtraccion; //Numero de Atraccion
     private Responsables Responsable; //Responsable de la atraccion
     HashMap<Integer, Personal.Ayudantes> Ayudantes; //Lista de ayudantes de la atraccion
     private static int siguientenumero; //Numero a asignar a la siguiente atraccion
@@ -23,6 +24,12 @@ abstract class Atraccion implements Serializable {
         siguientenumero++;
         Ayudantes = new HashMap<>();
         this.Responsable = responsable;
+        if (responsable.getNumeroDeAtraccion() != -1 && responsable.getNumeroDeAtraccion() != -1) {
+            GestorAtracciones.ObtenerDatos(responsable.getNumeroDeAtraccion()).activada = false;
+            GestorAtracciones.ObtenerDatos(responsable.getNumeroDeAtraccion()).Responsable = null;
+        } else {
+            GestorPersonal.borrar(responsable.getDNI());
+        }
         comun(Responsable, TipoDeAtraccion, numeroAtraccion);
     }
 
@@ -47,7 +54,7 @@ abstract class Atraccion implements Serializable {
         this.activada = false;
     }
 
-    protected void LlenarAyudantes(int nAyudantes, int TipoDeAtraccion) {
+    void LlenarAyudantes(int nAyudantes, int TipoDeAtraccion) {
         for (int i = 0; i < nAyudantes; i++) {
             Personal.Ayudantes empleado = this.Ayudantes.get(i);
             if (GestorPersonal.contiene(empleado.getDNI())) {
@@ -60,7 +67,7 @@ abstract class Atraccion implements Serializable {
 
 
     public void Activar(int nAyudantes) {
-        if (Ayudantes.size() == nAyudantes) {
+        if (Ayudantes.size() == nAyudantes && Responsable != null) {
             this.activada = true;
         } else {
             System.out.println("Error: No hay suficientes trabajadores asignados a la atracción");
@@ -71,7 +78,8 @@ abstract class Atraccion implements Serializable {
         return Ayudantes.get(DNI);
     }
 
-    public void BorrarTrabajador(int DNI) {
-        Ayudantes.remove(DNI);
+    public void BorrarTrabajador(TrabajadorDeAtraccion trabajador) {
+        GestorAtracciones.ObtenerDatos(trabajador.getNumeroDeAtraccion()).desactivar();
+        Ayudantes.remove(trabajador.getDNI());
     }
 }

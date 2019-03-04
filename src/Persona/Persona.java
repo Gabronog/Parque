@@ -8,12 +8,12 @@ public class Persona implements Serializable {
     private int Edad;
     private String Nombre;
     private int Altura;
-    private int CarnetDeDescuento;
+    private int CarnetDeDescuento = -1;
     private TipoPersona Tipopersona;
-    private boolean Discapacitado;
+    private boolean Discapacitado = false;
 
 
-    Persona(String Nombre, int Edad, int Altura) {
+    public Persona(String Nombre, int Edad, int Altura) {
         this.Nombre = Nombre;
         this.Altura = Altura;
         this.Edad = Edad;
@@ -32,5 +32,45 @@ public class Persona implements Serializable {
 
     public void Discapacitado() {
         this.Discapacitado ^= true;
+    }
+
+    public int getEdad() {
+        return Edad;
+    }
+
+    public void setEdad(int edad) {
+        Edad = edad;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public int getAltura() {
+        return Altura;
+    }
+
+    public void setAltura(int altura) {
+        Altura = altura;
+    }
+
+    public TipoPersona getTipopersona() {
+        return Tipopersona;
+    }
+
+    public void setTipopersona(TipoPersona tipopersona) {
+        Tipopersona = tipopersona;
+    }
+
+    public int getCarnetDeDescuento() {
+        return CarnetDeDescuento;
+    }
+
+    public boolean isDiscapacitado() {
+        return Discapacitado;
     }
 }

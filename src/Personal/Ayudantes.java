@@ -1,6 +1,6 @@
 package Personal;
 
-import Atracciones.*;
+import Atracciones.GestorAtracciones;
 
 import java.io.Serializable;
 
@@ -17,43 +17,17 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
         super(Nombre, SUELDO_AYUDANTE, DNI);
     }
 
-    public Responsables Ascender() {
+    public void Ascender() {
         Responsables R1 = new Responsables(getNombre(), getDNI());
         R1.setNumeroDeAtraccion(-1);
         R1.setTipoAtraccion(-1);
         GestorPersonal.insertar(R1);
         if (getTipoAtraccion() != -1 && getNumeroDeAtraccion() != -1) {
-            switch (getTipoAtraccion()) {
-                case 1:
-                    A a = (A) GestorAtracciones.ObtenerDatos(getNumeroDeAtraccion());
-                    a.desactivar();
-                    a.BorrarTrabajador(getDNI());
-                    break;
-                case 2:
-                    B b = (B) GestorAtracciones.ObtenerDatos(getNumeroDeAtraccion());
-                    b.desactivar();
-                    b.BorrarTrabajador(getDNI());
-                    break;
-
-                case 3:
-                    C c = (C) GestorAtracciones.ObtenerDatos(getNumeroDeAtraccion());
-                    c.desactivar();
-                    c.BorrarTrabajador(getDNI());
-                    break;
-                case 4:
-                    D d = (D) GestorAtracciones.ObtenerDatos(getNumeroDeAtraccion());
-                    d.desactivar();
-                    d.BorrarTrabajador(getDNI());
-                    break;
-                case 5:
-                    E e = (E) GestorAtracciones.ObtenerDatos(getNumeroDeAtraccion());
-                    e.desactivar();
-                    e.BorrarTrabajador(getDNI());
-                    break;
-                default:
-                    System.out.println("ERROR: OUTOFINDEX TIPOATRACCION");
-            }
+            GestorAtracciones.ObtenerDatos(getNumeroDeAtraccion()).BorrarTrabajador(this);
+            GestorPersonal.insertar(R1);
+        } else {
+            GestorPersonal.borrar(this.getDNI());
+            GestorPersonal.insertar(R1);
         }
-        return R1;
     }
 }

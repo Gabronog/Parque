@@ -2,33 +2,48 @@ package io;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public abstract class IO {
-    public static Object Cargar(String nombre) {
+    public static HashMap Cargar(String nombre) {
         try {
-            HashMap temp = null;
-            FileInputStream fis = new FileInputStream(nombre + ".ser");
+            FileInputStream fis = new FileInputStream(nombre);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            temp.putAll((HashMap) ois.readObject());
+            HashMap temp = new HashMap((HashMap) ois.readObject());
             ois.close();
             fis.close();
             System.out.println("Datos cargados correctamente");
             return temp;
         } catch (
-                IOException ioe) {
+                IOException | NullPointerException ioe) {
             ioe.printStackTrace();
             System.out.println("Se produjo un error al cargar los datos");
-            return null;
         } catch (ClassNotFoundException c) {
             System.out.println("Clase no encontrada.");
             c.printStackTrace();
-            return null;
         }
+        return new HashMap();
+    }
+
+    public static LinkedList CargarLista(String nombre) {
+        try {
+            FileInputStream fis = new FileInputStream(nombre);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            LinkedList temp = new LinkedList((LinkedList) ois.readObject());
+            ois.close();
+            fis.close();
+            System.out.println("Datos cargados correctamente");
+            return temp;
+        } catch (IOException | ClassNotFoundException | NullPointerException ioe) {
+            ioe.printStackTrace();
+            System.out.println("Se produjo un error al cargar los datos");
+        }
+        return new LinkedList();
     }
 
     public static void Guardar(String nombre, Object map) {
         try {
-            FileOutputStream fos = new FileOutputStream(nombre + ".ser");
+            FileOutputStream fos = new FileOutputStream(nombre);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(map);
             oos.close();
@@ -38,4 +53,5 @@ public abstract class IO {
             ioe.printStackTrace();
         }
     }
+
 }

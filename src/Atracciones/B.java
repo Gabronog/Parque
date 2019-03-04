@@ -9,14 +9,14 @@ import java.util.HashMap;
 
 public class B extends Atraccion implements Serializable {
     /**
-     * Atraccion Tipo A
+     * Atraccion Tipo B
      * Extiende Atraccion
      * Creado por Gabriel Noguerales
      */
 
-    private static final int nAyudantes = 6;
-    private static final int TipoDeAtraccion = 1;
-    private static final boolean VIP = true;
+    private static final int nAyudantes = 5;
+    private static final int TipoDeAtraccion = 2;
+    private static final boolean VIP = false;
 
     public B(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5, Ayudantes A6) {
         super(TipoDeAtraccion, responsable);

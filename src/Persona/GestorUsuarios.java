@@ -14,7 +14,13 @@ public abstract class GestorUsuarios {
     }
 
     public static Persona ObtenerDatos(int DNI) {
-        return Usuarios.get(DNI);
+        try {
+            return Usuarios.get(DNI);
+        } catch (NullPointerException a) {
+            System.out.println("No encontrado");
+            a.printStackTrace();
+            return null;
+        }
     }
 
     public static void Guardar() {
@@ -22,6 +28,7 @@ public abstract class GestorUsuarios {
     }
 
     public static void Cargar() {
+
         Usuarios = (HashMap<Integer, Persona>) IO.Cargar(archivo);
     }
 }
