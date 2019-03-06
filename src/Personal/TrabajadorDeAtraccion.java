@@ -30,17 +30,16 @@ public abstract class TrabajadorDeAtraccion extends Empleado {
 
 
     public void DejarAtraccion() {
-        Ayudantes empleado;
-        GestorAtracciones.ObtenerDatos(numeroDeAtraccion).desactivar();
-        empleado = GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Obtener(this.getDNI());
-        empleado.eliminarAtraccion();
-        GestorAtracciones.ObtenerDatos(numeroDeAtraccion).BorrarTrabajador(empleado);
-    }
-
-    void eliminarAtraccion() {
-        this.setTipoAtraccion(-1);
-        this.setNumeroDeAtraccion(-1);
-        GestorPersonal.insertar(this);
+        if (-1 != GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Obtener(this.getDNI()).getNumeroDeAtraccion()
+                && -1 != GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Obtener(this.getDNI()).getTipoAtraccion()) {
+            GestorAtracciones.ObtenerDatos(numeroDeAtraccion).desactivar();
+            GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Obtener(this.getDNI()).setTipoAtraccion(-1);
+            GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Obtener(this.getDNI()).setNumeroDeAtraccion(-1);
+            GestorPersonal.insertarEmpleado(this);
+            GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Borrar(this.getDNI());
+        } else {
+            System.out.println("El trabajador no estaba trabajando ninguna atraccion");
+        }
     }
 
 }

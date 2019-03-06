@@ -12,6 +12,6 @@ public class Atencion extends Empleado implements Serializable {
 
     Atencion(String Nombre, int sueldo, int DNI) {
         super(Nombre, sueldo, DNI);
-        GestorPersonal.insertar(this);
+        GestorPersonal.insertarEmpleado(this);
     }
 }

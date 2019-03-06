@@ -3,7 +3,6 @@ package Atracciones;
 import Personal.Ayudantes;
 import Personal.GestorPersonal;
 import Personal.Responsables;
-import Personal.TrabajadorDeAtraccion;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -16,7 +15,7 @@ public abstract class Atraccion implements Serializable {
     boolean activada; //Controla si la atraccion esta abierta al publico o cerrada.
     private int numeroAtraccion; //Numero de Atraccion
     private Responsables Responsable; //Responsable de la atraccion
-    HashMap<Integer, Personal.Ayudantes> Ayudantes; //Lista de ayudantes de la atraccion
+    private HashMap<Integer, Personal.Ayudantes> Ayudantes; //Lista de ayudantes de la atraccion
     private static int siguientenumero; //Numero a asignar a la siguiente atraccion
 
     Atraccion(int TipoDeAtraccion, Responsables responsable) {
@@ -39,7 +38,8 @@ public abstract class Atraccion implements Serializable {
         siguientenumero++;
         Ayudantes = new HashMap<>();
         Responsable = new Responsables(nombre, DNI);
-            comun(Responsable,TipoDeAtraccion,numeroAtraccion);
+        GestorPersonal.borrar(DNI);
+        comun(Responsable, TipoDeAtraccion, numeroAtraccion);
     }
 
 
@@ -62,13 +62,28 @@ public abstract class Atraccion implements Serializable {
         }
     }
 
+    void insertar(Ayudantes A1) {
+        if (-1 == A1.getTipoAtraccion() && -1 == A1.getNumeroDeAtraccion()) GestorPersonal.borrar(A1.getDNI());
+        else A1.DejarAtraccion();
+        this.Ayudantes.put(A1.getDNI(), A1);
+    }
+
+    void insertar(Ayudantes A1, Ayudantes A2) {
+        insertar(A1);
+        insertar(A2);
+    }
+
+    void insertar(Ayudantes A1, Ayudantes A2, Ayudantes A3) {
+        insertar(A1, A2);
+        insertar(A3);
+    }
+
     public Ayudantes Obtener(int DNI) {
         return Ayudantes.get(DNI);
     }
 
-    public void BorrarTrabajador(TrabajadorDeAtraccion trabajador) {
-        GestorAtracciones.ObtenerDatos(trabajador.getNumeroDeAtraccion()).desactivar();
-        Ayudantes.remove(trabajador.getDNI());
+    public void Borrar(int DNI) {
+        Ayudantes.remove(DNI);
     }
 
     void LlenarAyudantes(int nAyudantes, int TipoDeAtraccion) {

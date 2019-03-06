@@ -14,7 +14,7 @@ public class Relaciones extends Empleado implements Serializable {
 
     Relaciones(String Nombre, int DNI) {
         super(Nombre, SUELDO, DNI);
-        GestorPersonal.insertar(this);
+        GestorPersonal.insertarEmpleado(this);
     }
 
     public void Oferta(int numeroDeEntradas, int TipoEntrada, int Descuento) {

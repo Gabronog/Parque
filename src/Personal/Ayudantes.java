@@ -1,7 +1,5 @@
 package Personal;
 
-import Atracciones.GestorAtracciones;
-
 import java.io.Serializable;
 
 public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
@@ -10,30 +8,22 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
      * @param numeroDeAtraccion Numero de la atraccion que trabaja
      */
 
-
     private static final int SUELDO_AYUDANTE = 950;
-    private int numeroAyudantes;
+    private static final String nTipo = "AYUDANTE";
 
     public Ayudantes(String Nombre, int DNI) {
         super(Nombre, SUELDO_AYUDANTE, DNI);
-        GestorPersonal.insertar(this);
-        numeroAyudantes++;
+        GestorPersonal.insertarEmpleado(this);
+        GestorPersonal.insertarNumero(nTipo, GestorPersonal.getNumero(nTipo) + 1);
     }
 
     public void Ascender() {
         Responsables R1 = new Responsables(getNombre(), getDNI());
-        R1.setNumeroDeAtraccion(-1);
-        R1.setTipoAtraccion(-1);
-        GestorPersonal.insertar(R1);
         if (getTipoAtraccion() != -1 && getNumeroDeAtraccion() != -1) {
-            GestorAtracciones.ObtenerDatos(getNumeroDeAtraccion()).BorrarTrabajador(this);
-            GestorPersonal.insertar(R1);
+            this.DejarAtraccion();
         } else {
             GestorPersonal.borrar(this.getDNI());
-            GestorPersonal.insertar(R1);
         }
-        numeroAyudantes--;
+        GestorPersonal.insertarNumero(nTipo, GestorPersonal.getNumero(nTipo) - 1);
     }
-
-
 }

@@ -22,7 +22,7 @@ public class AlertBox {
         Button close = new Button("Cerrar");
         close.setOnAction(e -> window.close());
 
-        VBox layout = new VBox(10);
+        VBox layout = new VBox(15);
         layout.getChildren().addAll(label, close);
         layout.setAlignment(Pos.CENTER);
 
