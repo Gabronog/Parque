@@ -15,7 +15,15 @@ public abstract class GestorAtracciones {
 
 
     public static Atraccion ObtenerDatos(int numeroAtraccion) {
-        return Atracciones.get(numeroAtraccion);
+        try{return Atracciones.get(numeroAtraccion);}
+        catch (IndexOutOfBoundsException ignored){
+            System.out.println("Llegamos al final de la lista prematuramente.");
+            return null;
+        }
+    }
+
+    public static void Borrar(){
+        Atracciones.clear();
     }
 
     public static void Guardar() {

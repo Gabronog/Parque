@@ -22,6 +22,9 @@ public abstract class GestorUsuarios {
             return null;
         }
     }
+    public static void Borrar(){
+        Usuarios.clear();
+    }
 
     public static void Guardar() {
         IO.Guardar(archivo, Usuarios);

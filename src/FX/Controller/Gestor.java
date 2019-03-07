@@ -1,5 +1,6 @@
-package FX;
+package FX.Controller;
 
+import FX.Controller.Borderless;
 import javafx.fxml.Initializable;
 
 import java.net.URL;

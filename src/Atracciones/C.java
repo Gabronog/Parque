@@ -17,10 +17,10 @@ public class C extends Atraccion implements Serializable {
     private static final int TipoDeAtraccion = 3;
     private static final boolean VIP = false;
 
-    public C(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
+    public C(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3) {
         super(TipoDeAtraccion, responsable);
         //Comprobamos que todos los ayudantes tienen datos
-        if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null) {
+        if (A1 != null && A2 != null && A3 != null) {
             insertar(A1, A2, A3);
             //Asignamos la atraccion a cada Ayudante
             LlenarAyudantes(nAyudantes, TipoDeAtraccion);
@@ -33,12 +33,13 @@ public class C extends Atraccion implements Serializable {
         }
     }
 
-    public C(String nombreresp, int DNIresp, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
+    public C(String nombreresp, int DNIresp, Ayudantes A1, Ayudantes A2, Ayudantes A3) {
         super(TipoDeAtraccion, nombreresp, DNIresp);
-        if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null) {
+        if (A1 != null && A2 != null && A3 != null) {
             insertar(A1, A2, A3);
             LlenarAyudantes(nAyudantes, TipoDeAtraccion);
             this.activada = true;
         }
+        GestorAtracciones.add(this);
     }
 }

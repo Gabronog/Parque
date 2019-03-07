@@ -63,7 +63,7 @@ public abstract class Atraccion implements Serializable {
     }
 
     void insertar(Ayudantes A1) {
-        if (-1 == A1.getTipoAtraccion() && -1 == A1.getNumeroDeAtraccion()) GestorPersonal.borrar(A1.getDNI());
+        if (-1 == A1.getTipoAtraccion() || -1 == A1.getNumeroDeAtraccion()) GestorPersonal.borrar(A1.getDNI());
         else A1.DejarAtraccion();
         this.Ayudantes.put(A1.getDNI(), A1);
     }
@@ -87,14 +87,12 @@ public abstract class Atraccion implements Serializable {
     }
 
     void LlenarAyudantes(int nAyudantes, int TipoDeAtraccion) {
-        for (int i = 0; i < nAyudantes; i++) {
-            Personal.Ayudantes empleado = this.Ayudantes.get(i);
-            if (GestorPersonal.contiene(empleado.getDNI())) {
-                GestorPersonal.borrar(empleado.getDNI());
+        Ayudantes.forEach((k,v) -> {
+            if (GestorPersonal.contiene(v.getDNI())) {
+                GestorPersonal.borrar(v.getDNI());
             }
-            empleado.setNumeroDeAtraccion(this.numeroAtraccion);
-            empleado.setTipoAtraccion(TipoDeAtraccion);
-        }
+            v.setNumeroDeAtraccion(this.numeroAtraccion);
+            v.setTipoAtraccion(TipoDeAtraccion);
+        });
     }
-
 }

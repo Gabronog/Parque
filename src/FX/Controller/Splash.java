@@ -1,4 +1,4 @@
-package FX;
+package FX.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,13 +31,13 @@ public class Splash extends Borderless implements Initializable {
 
     @FXML
     private void irClientes() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("clientes.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FX/FXML/Clientes.fxml"));
         Launch.stage.setScene(new Scene(root, 1024, 720));
     }
 
     @FXML
     private void irGerente() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Gestor.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FX/FXML/Gestor.fxml"));
         Launch.stage.setScene(new Scene(root, 1024, 720));
 
     }

@@ -9,7 +9,7 @@ public class Responsables extends TrabajadorDeAtraccion implements Serializable 
     public Responsables(String Nombre, int DNI) {
         super(Nombre, SUELDO, DNI);
         GestorPersonal.insertarEmpleado(this);
-        GestorPersonal.insertarNumero(nTipo, GestorPersonal.getNumero(nTipo) + 1);
+        GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) + 1);
     }
 
     public void borrarResponsable() {

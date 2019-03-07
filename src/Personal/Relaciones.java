@@ -11,10 +11,12 @@ public class Relaciones extends Empleado implements Serializable {
      */
 
     private final static int SUELDO = (int) (950 * 0.2);
+    private final static String nTipo = "RELACIONES";
 
     Relaciones(String Nombre, int DNI) {
         super(Nombre, SUELDO, DNI);
         GestorPersonal.insertarEmpleado(this);
+        GestorPersonal.insertarNumero(nTipo,GestorPersonal.obtenerNumero(nTipo) +1);
     }
 
     public void Oferta(int numeroDeEntradas, int TipoEntrada, int Descuento) {

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="parent" prefHeight="400.0" prefWidth="600.0"
-            style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="FX.Splash">
+            style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="FX.Controller.Splash">
     <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0">
         <padding>
             <Insets top="100.0"/>
@@ -19,7 +19,7 @@
                 <Font name="Arial Black" size="52.0"/>
             </font>
         </Label>
-        <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" stylesheets="@Button.css">
+        <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" stylesheets="@../Style/Button.css">
             <VBox.margin>
                 <Insets top="90.0"/>
             </VBox.margin>
@@ -30,11 +30,11 @@
         </HBox>
     </VBox>
     <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="600.0">
-        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" stylesheets="@Button.css">
+        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeButtonAction" stylesheets="@../Style/Button.css">
             <graphic>
                 <ImageView fx:id="image" blendMode="HARD_LIGHT" fitHeight="22.0" fitWidth="24.0" pickOnBounds="true"
                            preserveRatio="true">
-                    <Image url="@../../Resources/Icons/icons8-delete-64.png"/>
+                    <Image url="@../../../Resources/Icons/icons8-delete-64.png"/>
                 </ImageView>
             </graphic>
         </Button>

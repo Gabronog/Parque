@@ -20,13 +20,16 @@ public abstract class GestorPersonal {
     public static void insertarNumero(String Tipo, int numero) {
         nPersonal.put(Tipo, numero);
     }
-
-    public static int getNumero(String Tipo) {
-        return nPersonal.get(Tipo);
+    public static void Borrar(){
+        nPersonal.clear();
+        Empleados.clear();
+    }
+    public static int obtenerNumero(String Tipo) {
+        return nPersonal.getOrDefault(Tipo,0);
     }
 
 
-    public static boolean contiene(int DNI) {
+    public static Boolean contiene(int DNI) {
         return Empleados.containsKey(DNI);
     }
 

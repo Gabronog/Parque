@@ -14,7 +14,7 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
     public Ayudantes(String Nombre, int DNI) {
         super(Nombre, SUELDO_AYUDANTE, DNI);
         GestorPersonal.insertarEmpleado(this);
-        GestorPersonal.insertarNumero(nTipo, GestorPersonal.getNumero(nTipo) + 1);
+        GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) + 1);
     }
 
     public void Ascender() {
@@ -24,6 +24,6 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
         } else {
             GestorPersonal.borrar(this.getDNI());
         }
-        GestorPersonal.insertarNumero(nTipo, GestorPersonal.getNumero(nTipo) - 1);
+        GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) - 1);
     }
 }
