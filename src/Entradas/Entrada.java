@@ -5,12 +5,11 @@ import Persona.Persona;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Date;
 
 
 public class Entrada {
     private static final double DESCUENTONINIO = 0.50;
-    private Date date;
+    private LocalDate date;
     private static final int PRECIOGENERAL = 60;
     private static final int PRECIOVIP = 50;
     private static final double MAXDESCUENTO = 0.90;
@@ -29,7 +28,7 @@ public class Entrada {
         this.precio = Entrada.CalcularPrecio(DNI, date, VIP);
     }
 
-    public static double CalcularPrecio(int DNI, LocalDate date, boolean VIP) {
+    private static double CalcularPrecio(int DNI, LocalDate date, boolean VIP) {
         double precio, descuento;
         precio = descuento = 0;
         Persona persona = GestorUsuarios.ObtenerDatos(DNI);

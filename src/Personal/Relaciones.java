@@ -13,7 +13,7 @@ public class Relaciones extends Empleado implements Serializable {
     private final static int SUELDO = (int) (950 * 0.2);
     private final static String nTipo = "RELACIONES";
 
-    Relaciones(String Nombre, int DNI) {
+    public Relaciones(String Nombre, int DNI) {
         super(Nombre, SUELDO, DNI);
         GestorPersonal.insertarEmpleado(this);
         GestorPersonal.insertarNumero(nTipo,GestorPersonal.obtenerNumero(nTipo) +1);
@@ -25,6 +25,9 @@ public class Relaciones extends Empleado implements Serializable {
 
     public void Oferta(int Descuento, int TipoEntrada) {
         //TODO Hacer una funcion que haga un descuento a cualquier entrada
+    }
+    public static int GetSueldo(){
+        return SUELDO;
     }
 
 }

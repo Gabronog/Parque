@@ -12,8 +12,8 @@ public class Responsables extends TrabajadorDeAtraccion implements Serializable 
         GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) + 1);
     }
 
-    public void borrarResponsable() {
-
+    public static int GetSueldo(){
+        return SUELDO;
     }
 }
 

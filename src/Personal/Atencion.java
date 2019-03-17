@@ -8,10 +8,15 @@ public class Atencion extends Empleado implements Serializable {
      * @param sueldo   Sueldo del Trabajador
      * @param DNI      Dni del Trabajador
      */
+    private final static int SUELDO = (int) (950 * 1.1);
+    private static final String nTipo = "ATENCION";
 
-
-    Atencion(String Nombre, int sueldo, int DNI) {
-        super(Nombre, sueldo, DNI);
+    public Atencion(String Nombre, int DNI) {
+        super(Nombre,SUELDO, DNI);
         GestorPersonal.insertarEmpleado(this);
+        GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) + 1);
+    }
+    public static int GetSueldo(){
+        return SUELDO;
     }
 }

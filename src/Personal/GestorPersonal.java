@@ -21,8 +21,11 @@ public abstract class GestorPersonal {
         nPersonal.put(Tipo, numero);
     }
     public static void Borrar(){
-        nPersonal.clear();
-        Empleados.clear();
+            try{nPersonal.clear();
+            Empleados.clear();}
+            catch (NullPointerException n){
+                System.out.println("Ya vacias");
+            }
     }
     public static int obtenerNumero(String Tipo) {
         return nPersonal.getOrDefault(Tipo,0);

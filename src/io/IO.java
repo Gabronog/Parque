@@ -12,12 +12,12 @@ public abstract class IO {
             HashMap temp = new HashMap((HashMap) ois.readObject());
             ois.close();
             fis.close();
-            System.out.println("Datos cargados correctamente");
+            System.out.println("Datos cargados correctamente en " + nombre +"!");
             return temp;
         } catch (
                 IOException | NullPointerException ioe) {
             ioe.printStackTrace();
-            System.out.println("Se produjo un error al cargar los datos");
+            System.out.println("Se produjo un error al cargar los datos en " + nombre);
         } catch (ClassNotFoundException c) {
             System.out.println("Clase no encontrada.");
             c.printStackTrace();
@@ -32,11 +32,11 @@ public abstract class IO {
             LinkedList temp = new LinkedList((LinkedList) ois.readObject());
             ois.close();
             fis.close();
-            System.out.println("Datos cargados correctamente");
+            System.out.println("Datos cargados correctamente en " + nombre +"!");
             return temp;
         } catch (IOException | ClassNotFoundException | NullPointerException ioe) {
             ioe.printStackTrace();
-            System.out.println("Se produjo un error al cargar los datos");
+            System.out.println("Se produjo un error al cargar los datos en " + nombre);
         }
         return new LinkedList();
     }
@@ -48,9 +48,10 @@ public abstract class IO {
             oos.writeObject(map);
             oos.close();
             fos.close();
-            System.out.println("Datos guardados correctamente!");
+            System.out.println("Datos guardados correctamente en " + nombre + "!");
         } catch (IOException ioe) {
             ioe.printStackTrace();
+            System.out.println("Se produjo un error al cargar los datos en " + nombre);
         }
     }
 }
