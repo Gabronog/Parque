@@ -1,98 +1,150 @@
 package Atracciones;
 
-import Personal.Ayudantes;
-import Personal.GestorPersonal;
-import Personal.Responsables;
+import personal.Ayudantes;
+import personal.GestorPersonal;
+import personal.Responsables;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import static main.LOG.getStackTrace;
+
+/**
+ * Clase abstracta base para todas las atracciones
+ */
 public abstract class Atraccion implements Serializable {
-    /**
-     * Clase base para el resto de Atracciones
-     * Creada por Gabriel Noguerales
-     */
     boolean activada; //Controla si la atraccion esta abierta al publico o cerrada.
     private int numeroAtraccion; //Numero de Atraccion
-    private Responsables Responsable; //Responsable de la atraccion
-    private HashMap<Integer, Personal.Ayudantes> Ayudantes; //Lista de ayudantes de la atraccion
+    private Responsables responsable; //responsable de la atraccion
+    private HashMap<Integer, personal.Ayudantes> ayudantes; //Lista de ayudantes de la atraccion
     private static int siguientenumero; //Numero a asignar a la siguiente atraccion
-
-    Atraccion(int TipoDeAtraccion, Responsables responsable) {
+    private static final Logger LOGGER = Logger.getLogger(Atraccion.class.getName());
+    /**
+     * Constructor base de atracciones reutilizando un responsable ya contratado
+     * @param tipoDeAtraccion Tipo de atraccion que se quiere construir
+     * @param responsable Responsable al que asignar a la atraccion
+     */
+    Atraccion(int tipoDeAtraccion, Responsables responsable) {
         numeroAtraccion = siguientenumero;
         siguientenumero++;
-        Ayudantes = new HashMap<>();
-        this.Responsable = responsable;
-        if (responsable.getNumeroDeAtraccion() != -1 && responsable.getNumeroDeAtraccion() != -1) {
-            GestorAtracciones.ObtenerDatos(responsable.getNumeroDeAtraccion()).activada = false;
-            GestorAtracciones.ObtenerDatos(responsable.getNumeroDeAtraccion()).Responsable = null;
+        ayudantes = new HashMap<>();
+        this.responsable = responsable;
+        if (this.responsable.getNumeroDeAtraccion() != -1 && this.responsable.getTipoAtraccion() != -1) {
+            //El responsable esta trabajando una atraccion ya
+            //Desactivamos la atraccion que estaba trabajando antes de asignarlo a esta
+            try {
+                LOGGER.info(String.format("Desactivando la atraccion %d debido a la incorporacion del trabajador con DNI %d " +
+                        "en la atraccion %d", responsable.getNumeroDeAtraccion(), responsable.getDNI(), this.numeroAtraccion));
+                GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).activada = false;
+                GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).responsable = null;
+                LOGGER.log(Level.INFO,"Desactivada...");
+            }catch(NullPointerException n){
+                LOGGER.severe(getStackTrace(n));
+            }
         } else {
             GestorPersonal.borrar(responsable.getDNI());
         }
-        comun(Responsable, TipoDeAtraccion, numeroAtraccion);
+        setResponsable(this.responsable, tipoDeAtraccion, numeroAtraccion);
     }
 
-
-    Atraccion(int TipoDeAtraccion, String nombre, int DNI) {
+    /**
+     * Constructor base de Atracciones contratando un nuevo Responsable
+     * @param tipoDeAtraccion tipoDeAtraccion que generar
+     * @param nombre Nombre del responsable
+     * @param DNI Dni del responsable
+     */
+    Atraccion(int tipoDeAtraccion, String nombre, int DNI) {
         numeroAtraccion = siguientenumero;
         siguientenumero++;
-        Ayudantes = new HashMap<>();
-        Responsable = new Responsables(nombre, DNI);
+        ayudantes = new HashMap<>();
+        responsable = new Responsables(nombre, DNI);
         GestorPersonal.borrar(DNI);
-        comun(Responsable, TipoDeAtraccion, numeroAtraccion);
+        setResponsable(responsable, tipoDeAtraccion, numeroAtraccion);
     }
 
-
-    private void comun(Responsables Responsable, int TipoDeAtraccion, int numeroAtraccion) {
-        if (null != Responsable) {
-            Responsable.setTipoAtraccion(TipoDeAtraccion);
-            Responsable.setNumeroDeAtraccion(numeroAtraccion);
+    /**
+     * Establece al responsable como trabajador de esa atraccion
+     * @param responsable Responsable al que asignar a la atraccion
+     * @param tipoDeAtraccion Tipo de atraccion a la que va a trabajar
+     * @param numeroAtraccion Numero de atraccion que va a trabajar
+     */
+    private void setResponsable(Responsables responsable, int tipoDeAtraccion, int numeroAtraccion) {
+        if (null != responsable) {
+            responsable.setTipoAtraccion(tipoDeAtraccion);
+            responsable.setNumeroDeAtraccion(numeroAtraccion);
         }
     }
 
+    /**
+     * Desactiva la atracción
+     */
     public void desactivar() {
         this.activada = false;
     }
 
-    public void Activar(int nAyudantes) {
-        if (Ayudantes.size() == nAyudantes && Responsable != null) {
+    /**
+     * Activa la atracción
+     * @param nAyudantes Numero de ayudantes de la atraccion
+     */
+    public void activar(int nAyudantes) {
+        if (ayudantes.size() == nAyudantes && responsable != null) {
             this.activada = true;
         } else {
-            System.out.println("Error: No hay suficientes trabajadores asignados a la atracción");
+            LOGGER.warning("No hay suficientes trabajadores asignados a la atracción");
         }
     }
 
-    void insertar(Ayudantes A1) {
-        if (-1 == A1.getTipoAtraccion() || -1 == A1.getNumeroDeAtraccion()) GestorPersonal.borrar(A1.getDNI());
-        else A1.DejarAtraccion();
-        this.Ayudantes.put(A1.getDNI(), A1);
+    /**
+     * Inserta un Ayudante en la atraccion
+     */
+    void insertar(Ayudantes ayudante) {
+        if (-1 == ayudante.getTipoAtraccion() || -1 == ayudante.getNumeroDeAtraccion()) GestorPersonal.borrar(ayudante.getDNI());
+        else ayudante.DejarAtraccion();
+        this.ayudantes.put(ayudante.getDNI(), ayudante);
     }
 
-    void insertar(Ayudantes A1, Ayudantes A2) {
-        insertar(A1);
-        insertar(A2);
+    /**
+     * Inserta dos ayudantes en la atraccion
+     */
+    void insertar(Ayudantes ayudante1, Ayudantes ayudante2) {
+        insertar(ayudante1);
+        insertar(ayudante2);
     }
 
-    void insertar(Ayudantes A1, Ayudantes A2, Ayudantes A3) {
-        insertar(A1, A2);
-        insertar(A3);
+    /**
+     * Inserta tres ayudantes en la atraccion
+     */
+    void insertar(Ayudantes ayudante1, Ayudantes ayudante2, Ayudantes ayudante3) {
+        insertar(ayudante1, ayudante2);
+        insertar(ayudante3);
     }
 
-    public Ayudantes Obtener(int DNI) {
-        return Ayudantes.get(DNI);
+    public Ayudantes getDNI(int DNI) {
+        return ayudantes.get(DNI);
     }
 
-    public void Borrar(int DNI) {
-        Ayudantes.remove(DNI);
+    /**
+     * Borra un trabajador de la atraccion
+     * @param dni dni
+     */
+    public void delete(int dni) {
+        ayudantes.remove(dni);
     }
 
-    void LlenarAyudantes(int nAyudantes, int TipoDeAtraccion) {
-        Ayudantes.forEach((k,v) -> {
+    /**
+     * Si los trabajadores estaban en la lista de trabajadores sin atraccione asignada
+     * se borra a estos de esta lista y se les asigna la atraccion
+     * @param tipoDeAtraccion Tipo de atraccion
+     */
+    void asignarAtraccion(int tipoDeAtraccion) {
+        ayudantes.forEach((k, v) -> {
             if (GestorPersonal.contiene(v.getDNI())) {
                 GestorPersonal.borrar(v.getDNI());
             }
             v.setNumeroDeAtraccion(this.numeroAtraccion);
-            v.setTipoAtraccion(TipoDeAtraccion);
+            v.setTipoAtraccion(tipoDeAtraccion);
         });
     }
 }

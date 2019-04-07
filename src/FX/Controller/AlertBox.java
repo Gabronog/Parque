@@ -1,4 +1,4 @@
-package FX.Controller;
+/**package FX.Controller;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,3 +33,4 @@ public class AlertBox {
 
     }
 }
+*/

@@ -1,14 +1,14 @@
-package Estadisticas;
+package estadisticas;
 
-import Personal.*;
+import personal.*;
 
-abstract class Estadisticas {
+interface Estadisticas {
     static int calcularTotalSueldo(){
-        int TotalSueldo = 0;
-        TotalSueldo += GestorPersonal.obtenerNumero("AYUDANTE") * Ayudantes.GetSueldo();
-        TotalSueldo += GestorPersonal.obtenerNumero("RESPONSABLES") * Responsables.GetSueldo();
-        TotalSueldo += GestorPersonal.obtenerNumero("ATENCION") * Atencion.GetSueldo();
-        TotalSueldo += GestorPersonal.obtenerNumero("RELACIONES") * Relaciones.GetSueldo();
-        return TotalSueldo;
+        int totalSueldo = 0;
+        totalSueldo += GestorPersonal.obtenerNumero("AYUDANTE") * Ayudantes.GetSueldo();
+        totalSueldo += GestorPersonal.obtenerNumero("RESPONSABLES") * Responsables.GetSueldo();
+        totalSueldo += GestorPersonal.obtenerNumero("ATENCION") * Atencion.GetSueldo();
+        totalSueldo += GestorPersonal.obtenerNumero("RELACIONES") * Relaciones.GetSueldo();
+        return totalSueldo;
     }
 }

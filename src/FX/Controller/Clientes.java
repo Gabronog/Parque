@@ -1,4 +1,4 @@
-package FX.Controller;
+/**package FX.Controller;
 
 import FX.Controller.Borderless;
 import javafx.fxml.Initializable;
@@ -12,3 +12,4 @@ public class Clientes extends Borderless implements Initializable {
         makeStageDragable();
     }
 }
+*/

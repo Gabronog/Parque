@@ -3,38 +3,47 @@ package Atracciones;
 import io.IO;
 
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
-public abstract class GestorAtracciones {
+public abstract class GestorAtracciones extends IO {
 
-    private static final String ARCHIVO = "DATA/Atracciones";
-    private static LinkedList<Atraccion> Atracciones = new LinkedList<>();
-
-    public static void EliminarAtraccion(int numeroAtraccion) {
-        Atracciones.remove(numeroAtraccion);
+    private static final String ARCHIVO = "DATA/atracciones";
+    private static LinkedList<Atraccion> atracciones = new LinkedList<>();
+    private static final Logger LOGGER = Logger.getLogger(GestorAtracciones.class.getName());
+    private GestorAtracciones(){
+        throw new IllegalStateException("No se pueden hacer instancias de los gestores");
     }
 
+    public static void eliminarAtraccion(int numeroAtraccion) {
+        atracciones.remove(numeroAtraccion);
+    }
 
-    public static Atraccion ObtenerDatos(int numeroAtraccion) {
-        try{return Atracciones.get(numeroAtraccion);}
+    /**
+     * Devuelve los datos de una atraccion dado el numero de esta
+     * @param numeroAtraccion Numero de atraccion que consultar
+     * @return La atraccion que buscabas
+     */
+    public static Atraccion obtenerDatos(int numeroAtraccion) {
+        try{return atracciones.get(numeroAtraccion);}
         catch (IndexOutOfBoundsException ignored){
-            System.out.println("Llegamos al final de la lista prematuramente.");
+            LOGGER.warning("Llegamos al final de la lista prematuramente.");
             return null;
         }
     }
 
-    public static void Borrar(){
-        Atracciones.clear();
+    public static void borrar(){
+        atracciones.clear();
     }
 
-    public static void Guardar() {
-        IO.Guardar(ARCHIVO, Atracciones);
+    public static void guardar() {
+        guardar(ARCHIVO, atracciones);
     }
 
-    public static void Cargar() {
-        Atracciones = IO.CargarLista(ARCHIVO);
+    public static void cargar() {
+        atracciones = cargarLista(ARCHIVO);
     }
 
-    public static void add(Atraccion Atraccion) {
-        Atracciones.add(Atraccion);
+    public static void add(Atraccion atraccion) {
+        atracciones.add(atraccion);
     }
 }

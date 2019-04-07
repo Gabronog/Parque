@@ -1,3 +1,4 @@
+/*
 package FX.Controller;
 
 import javafx.geometry.Pos;
@@ -49,3 +50,4 @@ public class ConfirmationBox {
     }
 
 }
+*/

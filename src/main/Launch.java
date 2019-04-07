@@ -1,61 +1,56 @@
 package main;
 
 import Atracciones.*;
-import Estadisticas.GestorGastos;
+import estadisticas.GestorGastos;
 import Persona.GestorUsuarios;
-import Personal.*;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import personal.*;
 
-import static main.DatosEnunciado.cargarDatosEnunciado;
+import java.util.logging.*;
 
-public class Launch extends Application {
-    public static Stage stage;
+import static main.LOG.getStackTrace;
+import static main.LOG.inicializarLOG;
+
+public class Launch{
+    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void main(String[] args) {
-        CargarDatos(); //Carga los datos serializados previamente de atracciones y clientes
+        try {
+            inicializarLOG(LOGGER);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE,getStackTrace(e));
+        }
+        LOGGER.log(Level.INFO,"Cargando datos...");
+        cargarDatos(); //Carga los datos serializados previamente de atracciones y clientes
+        LOGGER.log(Level.INFO,"Se cargaron todos los datos");
+        // cargarDatosEnunciado();
+        // launch()
 
-        //cargarDatosEnunciado();
-
-        //TODO GUI 35%
-
-        GuardarDatos(); //Guarda los datos de las atracciones y de los clientes
+        guardarDatos(); //Guarda los datos de las atracciones y de los clientes
         ComprobarFecha.comprobar();
     }
 
-    private static void CargarDatos() {
-        GestorUsuarios.Cargar();
-        GestorAtracciones.Cargar();
-        GestorPersonal.Cargar();
-        GestorGastos.Cargar();
+    private static void cargarDatos() {
+        LOGGER.info("Cargando clientes de la empresa...");
+        GestorUsuarios.cargar();
+        LOGGER.info("Cargando las atracciones...");
+        GestorAtracciones.cargar();
+        LOGGER.info("Cargando la informacion acerca del personal...");
+        GestorPersonal.cargar();
+        LOGGER.info("Cargando la informacion de los balances de gastos...");
+        GestorGastos.cargar();
     }
 
-    private static void GuardarDatos() {
-        GestorAtracciones.Guardar();
-        GestorUsuarios.Guardar();
-        GestorPersonal.Guardar();
-        GestorGastos.Guardar();
+    private static void guardarDatos() {
+        GestorAtracciones.guardar();
+        GestorUsuarios.guardar();
+        GestorPersonal.guardar();
+        GestorGastos.guardar();
     }
 
-    static void BorrarDatos(){
-        GestorAtracciones.Borrar();
-        GestorUsuarios.Borrar();
-        GestorPersonal.Borrar();
-        GuardarDatos();
-    }
-
-
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        stage.initStyle(StageStyle.UNDECORATED);
-        Launch.stage = stage;
-        Parent root = FXMLLoader.load(getClass().getResource("../FX/FXML/splash.fxml"));
-        Launch.stage.setScene(new Scene(root, 600, 400));
-        Launch.stage.show();
+    static void borrarDatos(){
+        GestorAtracciones.borrar();
+        GestorUsuarios.borrar();
+        GestorPersonal.borrar();
+        guardarDatos();
     }
 }

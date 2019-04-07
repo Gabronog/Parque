@@ -1,39 +1,42 @@
-package Estadisticas;
+package estadisticas;
 
 import io.IO;
 
 import java.time.Month;
-import java.time.Year;
 import java.util.HashMap;
 
-import static Estadisticas.Estadisticas.calcularTotalSueldo;
+import static estadisticas.Estadisticas.calcularTotalSueldo;
 
-public abstract class GestorGastos {
-    private final static String archivo = "DATA/Gastos";
-    private static HashMap<MesAnio,Integer> Gastos = new HashMap<>();
+public abstract class GestorGastos extends IO{
+    private static final String ARCHIVO = "DATA/gastos";
+    private static HashMap<MesAnio,Integer> gastos = new HashMap<>();
 
     public static void nuevoBalance(MesAnio a){
-        Gastos.put(a,calcularTotalSueldo());
+        gastos.put(a,calcularTotalSueldo());
     }
 
-    public static void Guardar() {
-        IO.Guardar(archivo, Gastos);
+    public static void guardar() {
+        guardar(ARCHIVO, gastos);
     }
 
-    public static void Cargar() {
-        Gastos = (HashMap<MesAnio,Integer>) IO.Cargar(archivo);
+    public static void cargar() {
+        gastos = (HashMap<MesAnio,Integer>) cargar(ARCHIVO);
+    }
+
+    private GestorGastos(){
+        throw new IllegalStateException("No se pueden hacer instancias de los gestores");
     }
 
     public static class MesAnio{
         private Month mes;
-        private int Anio;
+        private int anio;
         public MesAnio(Month month, int year){
-            this.Anio = year;
+            this.anio = year;
             this.mes = month;
         }
 
         public int getAnio() {
-            return Anio;
+            return anio;
         }
         public Month getMes(){
             return mes;

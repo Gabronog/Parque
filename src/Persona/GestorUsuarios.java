@@ -3,36 +3,36 @@ package Persona;
 import io.IO;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 
-public abstract class GestorUsuarios {
-    private final static String archivo = "DATA/Clientes";
-    private static HashMap<Integer, Persona> Usuarios = new HashMap<Integer, Persona>();
-
-    public static void MeterUsuario(int DNI, String Nombre, int Edad, int Altura) {
-        Usuarios.put(DNI, new Persona(Nombre, Edad, Altura));
+public abstract class GestorUsuarios extends IO{
+    private static final String ARCHIVO = "DATA/Clientes";
+    private static HashMap<Integer, Persona> usuarios = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(GestorUsuarios.class.getName());
+    public static void insertarUsuario(int dni, String nombre, int edad, int altura) {
+        usuarios.put(dni, new Persona(nombre, edad, altura));
     }
 
-    public static Persona ObtenerDatos(int DNI) {
+    public static Persona obtenerDatos(int dni) {
         try {
-            return Usuarios.get(DNI);
+            return usuarios.get(dni);
         } catch (NullPointerException a) {
             System.out.println("No encontrado");
             a.printStackTrace();
             return null;
         }
     }
-    public static void Borrar(){
-        Usuarios.clear();
+    public static void borrar(){
+        usuarios.clear();
     }
 
-    public static void Guardar() {
-        IO.Guardar(archivo, Usuarios);
+    public static void guardar() {
+        guardar(ARCHIVO, usuarios);
     }
 
-    public static void Cargar() {
-
-        Usuarios = (HashMap<Integer, Persona>) IO.Cargar(archivo);
+    public static void cargar() {
+        usuarios = (HashMap<Integer, Persona>) cargar(ARCHIVO);
     }
 }
 

@@ -3,55 +3,56 @@ package io;
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Logger;
+
+import static main.LOG.getStackTrace;
 
 public abstract class IO {
-    public static HashMap Cargar(String nombre) {
+    private static final Logger LOGGER = Logger.getLogger(IO.class.getName());
+    private static final String ERROR = "Se produjo un error en";
+    private static final String CARGADO = "Datos cargados correctamente en ";
+    public static HashMap cargar(String nombre) {
         try {
             FileInputStream fis = new FileInputStream(nombre);
             ObjectInputStream ois = new ObjectInputStream(fis);
             HashMap temp = new HashMap((HashMap) ois.readObject());
             ois.close();
             fis.close();
-            System.out.println("Datos cargados correctamente en " + nombre +"!");
+            LOGGER.info(String.format("%s %s!",CARGADO, nombre));
             return temp;
         } catch (
-                IOException | NullPointerException ioe) {
-            ioe.printStackTrace();
-            System.out.println("Se produjo un error al cargar los datos en " + nombre);
-        } catch (ClassNotFoundException c) {
-            System.out.println("Clase no encontrada.");
-            c.printStackTrace();
+                IOException | ClassNotFoundException| NullPointerException ioe) {
+            LOGGER.severe(getStackTrace(ioe));
+            throw new IllegalStateException(ERROR + nombre);
         }
-        return new HashMap();
     }
 
-    public static LinkedList CargarLista(String nombre) {
+    public static LinkedList cargarLista(String nombre) {
         try {
             FileInputStream fis = new FileInputStream(nombre);
             ObjectInputStream ois = new ObjectInputStream(fis);
             LinkedList temp = new LinkedList((LinkedList) ois.readObject());
             ois.close();
             fis.close();
-            System.out.println("Datos cargados correctamente en " + nombre +"!");
+            LOGGER.info(CARGADO + nombre + "!");
             return temp;
         } catch (IOException | ClassNotFoundException | NullPointerException ioe) {
-            ioe.printStackTrace();
-            System.out.println("Se produjo un error al cargar los datos en " + nombre);
+            LOGGER.severe(getStackTrace(ioe));
+            throw new IllegalStateException(ERROR + nombre);
         }
-        return new LinkedList();
     }
 
-    public static void Guardar(String nombre, Object map) {
+    public static void guardar(String nombre, Object map) {
         try {
-            FileOutputStream fos = new FileOutputStream(nombre);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(map);
-            oos.close();
-            fos.close();
-            System.out.println("Datos guardados correctamente en " + nombre + "!");
+            try (FileOutputStream fos = new FileOutputStream(nombre)) {
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(map);
+                oos.close();
+            }
+            LOGGER.info("Datos guardados correctamente en " + nombre + "!");
         } catch (IOException ioe) {
-            ioe.printStackTrace();
-            System.out.println("Se produjo un error al cargar los datos en " + nombre);
+            LOGGER.severe(getStackTrace(ioe));
+            throw new IllegalStateException(ERROR + nombre);
         }
     }
 }

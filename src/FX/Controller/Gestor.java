@@ -1,3 +1,4 @@
+/*
 package FX.Controller;
 
 import FX.Controller.Borderless;
@@ -12,3 +13,4 @@ public class Gestor extends Borderless implements Initializable {
         makeStageDragable();
     }
 }
+*/

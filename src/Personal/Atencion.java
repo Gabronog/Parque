@@ -1,4 +1,4 @@
-package Personal;
+package personal;
 
 import java.io.Serializable;
 

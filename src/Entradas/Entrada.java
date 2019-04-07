@@ -1,4 +1,4 @@
-package Entradas;
+package entradas;
 
 import Persona.GestorUsuarios;
 import Persona.Persona;
@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.Month;
 
 
+/**
+ * |entradas|
+ */
 public class Entrada {
     private static final double DESCUENTONINIO = 0.50;
     private LocalDate date;
@@ -25,13 +28,14 @@ public class Entrada {
 
 
     public Entrada(int DNI, LocalDate date, boolean VIP) {
-        this.precio = Entrada.CalcularPrecio(DNI, date, VIP);
+        this.precio = Entrada.calcularPrecio(DNI, date, VIP);
     }
 
-    private static double CalcularPrecio(int DNI, LocalDate date, boolean VIP) {
-        double precio, descuento;
+    private static double calcularPrecio(int dni, LocalDate date, boolean vip) {
+        double precio;
+        double descuento;
         precio = descuento = 0;
-        Persona persona = GestorUsuarios.ObtenerDatos(DNI);
+        Persona persona = GestorUsuarios.obtenerDatos(dni);
         if (persona != null) {
             switch (persona.getTipopersona()) {
                 case Ninio:
@@ -47,7 +51,7 @@ public class Entrada {
                     System.out.println("ERROR INDEXOUTOFRANGE TIPOPERSONA");
             }
         } else {
-            System.out.println("ERROR NOT A VALID PERSON");
+            System.out.println("ERROR NOT A VALID PERSON"); //TODO log
             return -1;
         }
         if (persona.getCarnetDeDescuento() != -1) descuento += DESCUENTOCARNET;
@@ -62,11 +66,13 @@ public class Entrada {
             case ALTA:
                 descuento += INCREMENTOTEMPALTA;
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + calcularTemporada(date));
         }
         if (descuento > 0.9) {
             descuento = 0.9;
         }
-        if (VIP) precio += PRECIOVIP;
+        if (vip) precio += PRECIOVIP;
         precio += PRECIOGENERAL;
         precio = precio * (1 - descuento);
         return (precio / 100) * 100;

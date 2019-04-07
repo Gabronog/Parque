@@ -1,4 +1,4 @@
-package Personal;
+package personal;
 
 import Atracciones.GestorAtracciones;
 
@@ -30,11 +30,11 @@ public abstract class TrabajadorDeAtraccion extends Empleado {
 
 
     public void DejarAtraccion() {
-        TrabajadorDeAtraccion trabajador = (TrabajadorDeAtraccion) GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Obtener(this.getDNI());
+        TrabajadorDeAtraccion trabajador = (TrabajadorDeAtraccion) GestorAtracciones.obtenerDatos(numeroDeAtraccion).getDNI(this.getDNI());
         if ((-1 != trabajador.getNumeroDeAtraccion())
                 && (-1 != trabajador.getTipoAtraccion())) {
-            GestorAtracciones.ObtenerDatos(numeroDeAtraccion).desactivar();
-            GestorAtracciones.ObtenerDatos(numeroDeAtraccion).Borrar(this.getDNI());
+            GestorAtracciones.obtenerDatos(numeroDeAtraccion).desactivar();
+            GestorAtracciones.obtenerDatos(numeroDeAtraccion).delete(this.getDNI());
             trabajador.setTipoAtraccion(-1);
             trabajador.setNumeroDeAtraccion(-1);
             GestorPersonal.insertarEmpleado(this);

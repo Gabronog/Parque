@@ -1,3 +1,4 @@
+/*
 package FX.Controller;
 
 import javafx.fxml.FXML;
@@ -42,3 +43,4 @@ public class Splash extends Borderless implements Initializable {
 
     }
 }
+*/

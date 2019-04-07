@@ -1,7 +1,7 @@
 package Atracciones;
 
-import Personal.Ayudantes;
-import Personal.Responsables;
+import personal.Ayudantes;
+import personal.Responsables;
 
 import java.io.Serializable;
 
@@ -12,18 +12,17 @@ public class B extends Atraccion implements Serializable {
      * Creado por Gabriel Noguerales
      */
 
-    private static final int nAyudantes = 5;
-    private static final int TipoDeAtraccion = 2;
+    private static final int TIPO_DE_ATRACCION = 2;
     private static final boolean VIP = false;
 
     public B(Responsables responsable, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
-        super(TipoDeAtraccion, responsable);
+        super(TIPO_DE_ATRACCION, responsable);
         //Comprobamos que todos los ayudantes tienen datos
         if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null) {
             insertar(A1, A2, A3);
             insertar(A4, A5);
             //Asignamos la atraccion a cada Ayudante
-            LlenarAyudantes(nAyudantes, TipoDeAtraccion);
+            asignarAtraccion(TIPO_DE_ATRACCION);
             //Activamos la atraccion
             this.activada = true;
             //Guardamos la atraccion en nuestra lista
@@ -34,11 +33,11 @@ public class B extends Atraccion implements Serializable {
     }
 
     public B(String nombreresp, int DNIresp, Ayudantes A1, Ayudantes A2, Ayudantes A3, Ayudantes A4, Ayudantes A5) {
-        super(TipoDeAtraccion, nombreresp, DNIresp);
+        super(TIPO_DE_ATRACCION, nombreresp, DNIresp);
         if (A1 != null && A2 != null && A3 != null && A4 != null && A5 != null) {
             insertar(A1, A2, A3);
             insertar(A4, A5);
-            LlenarAyudantes(nAyudantes, TipoDeAtraccion);
+            asignarAtraccion(TIPO_DE_ATRACCION);
             this.activada = true;
         }
     }

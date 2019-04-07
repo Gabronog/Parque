@@ -1,4 +1,4 @@
-package Personal;
+package personal;
 
 import java.io.Serializable;
 
@@ -12,16 +12,16 @@ public abstract class Empleado implements Serializable {
     }
 
     public int getSueldo() {
-        return Sueldo;
+        return sueldo;
     }
 
     private String Nombre;
     private int DNI;
-    private int Sueldo;
+    private final int sueldo;
 
     Empleado(String Nombre, int sueldo, int DNI) {
         super();
-        this.Sueldo = sueldo;
+        this.sueldo = sueldo;
         this.Nombre = Nombre;
         this.DNI = DNI;
     }
