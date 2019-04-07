@@ -11,12 +11,13 @@ public class Atencion extends Empleado implements Serializable {
     private final static int SUELDO = (int) (950 * 1.1);
     private static final String nTipo = "ATENCION";
 
-    public Atencion(String Nombre, int DNI) {
-        super(Nombre,SUELDO, DNI);
+    public Atencion(String nombre, int dni) {
+        super(nombre, dni);
         GestorPersonal.insertarEmpleado(this);
         GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) + 1);
     }
-    public static int GetSueldo(){
+
+    public static int getSUELDO() {
         return SUELDO;
     }
 }

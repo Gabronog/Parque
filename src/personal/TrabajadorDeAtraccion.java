@@ -4,20 +4,20 @@ import Atracciones.GestorAtracciones;
 
 public abstract class TrabajadorDeAtraccion extends Empleado {
 
-    private int TipoAtraccion = -1;
+    private int tipoAtraccion = -1;
     private int numeroDeAtraccion = -1;
 
-    TrabajadorDeAtraccion(String Nombre, int sueldo, int DNI) {
-        super(Nombre, sueldo, DNI);
+    TrabajadorDeAtraccion(String nombre, int dni) {
+        super(nombre, dni);
 
     }
 
     public int getTipoAtraccion() {
-        return TipoAtraccion;
+        return tipoAtraccion;
     }
 
     public void setTipoAtraccion(Integer tipoAtraccion) {
-        TipoAtraccion = tipoAtraccion;
+        this.tipoAtraccion = tipoAtraccion;
     }
 
     public int getNumeroDeAtraccion() {
@@ -29,12 +29,12 @@ public abstract class TrabajadorDeAtraccion extends Empleado {
     }
 
 
-    public void DejarAtraccion() {
-        TrabajadorDeAtraccion trabajador = (TrabajadorDeAtraccion) GestorAtracciones.obtenerDatos(numeroDeAtraccion).getDNI(this.getDNI());
+    public void dejarAtraccion() {
+        TrabajadorDeAtraccion trabajador = (TrabajadorDeAtraccion) GestorAtracciones.obtenerDatos(numeroDeAtraccion).getDNI(this.getDni());
         if ((-1 != trabajador.getNumeroDeAtraccion())
                 && (-1 != trabajador.getTipoAtraccion())) {
             GestorAtracciones.obtenerDatos(numeroDeAtraccion).desactivar();
-            GestorAtracciones.obtenerDatos(numeroDeAtraccion).delete(this.getDNI());
+            GestorAtracciones.obtenerDatos(numeroDeAtraccion).delete(this.getDni());
             trabajador.setTipoAtraccion(-1);
             trabajador.setNumeroDeAtraccion(-1);
             GestorPersonal.insertarEmpleado(this);

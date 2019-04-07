@@ -36,7 +36,7 @@ public abstract class Atraccion implements Serializable {
             //Desactivamos la atraccion que estaba trabajando antes de asignarlo a esta
             try {
                 LOGGER.info(String.format("Desactivando la atraccion %d debido a la incorporacion del trabajador con DNI %d " +
-                        "en la atraccion %d", responsable.getNumeroDeAtraccion(), responsable.getDNI(), this.numeroAtraccion));
+                        "en la atraccion %d", responsable.getNumeroDeAtraccion(), responsable.getDni(), this.numeroAtraccion));
                 GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).activada = false;
                 GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).responsable = null;
                 LOGGER.log(Level.INFO,"Desactivada...");
@@ -44,7 +44,7 @@ public abstract class Atraccion implements Serializable {
                 LOGGER.severe(getStackTrace(n));
             }
         } else {
-            GestorPersonal.borrar(responsable.getDNI());
+            GestorPersonal.borrar(responsable.getDni());
         }
         setResponsable(this.responsable, tipoDeAtraccion, numeroAtraccion);
     }
@@ -100,9 +100,9 @@ public abstract class Atraccion implements Serializable {
      * Inserta un Ayudante en la atraccion
      */
     void insertar(Ayudantes ayudante) {
-        if (-1 == ayudante.getTipoAtraccion() || -1 == ayudante.getNumeroDeAtraccion()) GestorPersonal.borrar(ayudante.getDNI());
-        else ayudante.DejarAtraccion();
-        this.ayudantes.put(ayudante.getDNI(), ayudante);
+        if (-1 == ayudante.getTipoAtraccion() || -1 == ayudante.getNumeroDeAtraccion()) GestorPersonal.borrar(ayudante.getDni());
+        else ayudante.dejarAtraccion();
+        this.ayudantes.put(ayudante.getDni(), ayudante);
     }
 
     /**
@@ -140,8 +140,8 @@ public abstract class Atraccion implements Serializable {
      */
     void asignarAtraccion(int tipoDeAtraccion) {
         ayudantes.forEach((k, v) -> {
-            if (GestorPersonal.contiene(v.getDNI())) {
-                GestorPersonal.borrar(v.getDNI());
+            if (GestorPersonal.contiene(v.getDni())) {
+                GestorPersonal.borrar(v.getDni());
             }
             v.setNumeroDeAtraccion(this.numeroAtraccion);
             v.setTipoAtraccion(tipoDeAtraccion);

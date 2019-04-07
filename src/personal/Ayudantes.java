@@ -8,26 +8,26 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
      * @param numeroDeAtraccion Numero de la atraccion que trabaja
      */
 
-    private static final int SUELDO_AYUDANTE = 950;
+    private static final int SUELDO = 950;
     private static final String nTipo = "AYUDANTE";
 
-    public Ayudantes(String Nombre, int DNI) {
-        super(Nombre, SUELDO_AYUDANTE, DNI);
+    public Ayudantes(String nombre, int dni) {
+        super(nombre, dni);
         GestorPersonal.insertarEmpleado(this);
         GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) + 1);
     }
 
     public void Ascender() {
-        Responsables R1 = new Responsables(getNombre(), getDNI());
+        new Responsables(getNombre(), getDni());
         if (getTipoAtraccion() != -1 && getNumeroDeAtraccion() != -1) {
-            this.DejarAtraccion();
+            this.dejarAtraccion();
         } else {
-            GestorPersonal.borrar(this.getDNI());
+            GestorPersonal.borrar(this.getDni());
         }
         GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) - 1);
     }
 
-    public static int GetSueldo(){
-        return SUELDO_AYUDANTE;
+    public static int getSUELDO() {
+        return SUELDO;
     }
 }

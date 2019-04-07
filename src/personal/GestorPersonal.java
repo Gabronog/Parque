@@ -1,7 +1,6 @@
 package personal;
 
 import io.IO;
-import main.LOG;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -20,8 +19,8 @@ public abstract class GestorPersonal extends IO{
     private static final Logger LOGGER = Logger.getLogger(GestorPersonal.class.getName());
 
     public static void insertarEmpleado(Empleado empleado) {
-        empleados.put(empleado.getDNI(), empleado);
-        LOGGER.info("Guardado el empleado con DNI" + empleado.getDNI());
+        empleados.put(empleado.getDni(), empleado);
+        LOGGER.info("Guardado el empleado con DNI" + empleado.getDni());
     }
 
     public static void insertarNumero(String tipo, int numero) {
