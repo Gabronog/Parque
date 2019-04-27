@@ -7,11 +7,13 @@ import java.util.logging.Logger;
 
 import static main.LOG.getStackTrace;
 
-public abstract class IO {
-    private static final Logger LOGGER = Logger.getLogger(IO.class.getName());
-    private static final String ERROR = "Se produjo un error en";
-    private static final String CARGADO = "Datos cargados correctamente en ";
-    public static HashMap cargar(String nombre) {
+public interface IO {
+
+    Logger LOGGER = Logger.getLogger(IO.class.getName());
+    String ERROR = "Se produjo un error en";
+    String CARGADO = "Datos cargados correctamente en ";
+
+    static HashMap cargar(String nombre) {
         try {
             FileInputStream fis = new FileInputStream(nombre);
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -27,7 +29,7 @@ public abstract class IO {
         }
     }
 
-    public static LinkedList cargarLista(String nombre) {
+    static LinkedList cargarLista(String nombre) {
         try {
             FileInputStream fis = new FileInputStream(nombre);
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -42,7 +44,7 @@ public abstract class IO {
         }
     }
 
-    public static void guardar(String nombre, Object map) {
+    static void guardar(String nombre, Object map) {
         try {
             try (FileOutputStream fos = new FileOutputStream(nombre)) {
                 ObjectOutputStream oos = new ObjectOutputStream(fos);

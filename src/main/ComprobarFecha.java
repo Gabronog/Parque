@@ -1,7 +1,7 @@
 package main;
 
-import estadisticas.GestorGastos;
-import estadisticas.GestorGastos.MesAnio;
+import Estadisticas.GestorGastos;
+import Estadisticas.GestorGastos.MesAnio;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;

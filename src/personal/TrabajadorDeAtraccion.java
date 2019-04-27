@@ -9,7 +9,6 @@ public abstract class TrabajadorDeAtraccion extends Empleado {
 
     TrabajadorDeAtraccion(String nombre, int dni) {
         super(nombre, dni);
-
     }
 
     public int getTipoAtraccion() {
@@ -42,5 +41,4 @@ public abstract class TrabajadorDeAtraccion extends Empleado {
             System.out.println("El trabajador no estaba trabajando ninguna atraccion");
         }
     }
-
 }

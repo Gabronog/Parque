@@ -1,13 +1,14 @@
-package estadisticas;
+package Estadisticas;
 
 import io.IO;
 
 import java.time.Month;
 import java.util.HashMap;
 
-import static estadisticas.Estadisticas.calcularTotalSueldo;
+import static Estadisticas.Estadisticas.calcularTotalSueldo;
 
-public abstract class GestorGastos extends IO{
+
+public final class GestorGastos implements IO{
     private static final String ARCHIVO = "DATA/gastos";
     private static HashMap<MesAnio,Integer> gastos = new HashMap<>();
 
@@ -16,11 +17,11 @@ public abstract class GestorGastos extends IO{
     }
 
     public static void guardar() {
-        guardar(ARCHIVO, gastos);
+        IO.guardar(ARCHIVO, gastos);
     }
 
     public static void cargar() {
-        gastos = (HashMap<MesAnio,Integer>) cargar(ARCHIVO);
+        gastos = (HashMap<MesAnio,Integer>) IO.cargar(ARCHIVO);
     }
 
     private GestorGastos(){

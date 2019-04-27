@@ -11,7 +11,7 @@ public class Responsables extends TrabajadorDeAtraccion implements Serializable 
         GestorPersonal.insertarEmpleado(this);
         GestorPersonal.insertarNumero(TIPO, GestorPersonal.obtenerNumero(TIPO) + 1);
     }
-    public static int getSUELDO() {
+    public int getSUELDO() {
         return SUELDO;
     }
 }

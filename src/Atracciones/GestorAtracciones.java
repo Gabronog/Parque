@@ -5,11 +5,12 @@ import io.IO;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
-public abstract class GestorAtracciones extends IO {
+public final class GestorAtracciones implements IO {
 
     private static final String ARCHIVO = "DATA/atracciones";
     private static LinkedList<Atraccion> atracciones = new LinkedList<>();
     private static final Logger LOGGER = Logger.getLogger(GestorAtracciones.class.getName());
+
     private GestorAtracciones(){
         throw new IllegalStateException("No se pueden hacer instancias de los gestores");
     }
@@ -36,11 +37,11 @@ public abstract class GestorAtracciones extends IO {
     }
 
     public static void guardar() {
-        guardar(ARCHIVO, atracciones);
+        IO.guardar(ARCHIVO, atracciones);
     }
 
     public static void cargar() {
-        atracciones = cargarLista(ARCHIVO);
+        atracciones = IO.cargarLista(ARCHIVO);
     }
 
     public static void add(Atraccion atraccion) {

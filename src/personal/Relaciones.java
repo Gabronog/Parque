@@ -26,7 +26,7 @@ public class Relaciones extends Empleado implements Serializable {
     public void Oferta(int Descuento, int TipoEntrada) {
         //TODO Hacer una funcion que haga un descuento a cualquier entrada
     }
-    public static int getSUELDO() {
+    public int getSUELDO() {
         return SUELDO;
     }
 }

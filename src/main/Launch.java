@@ -1,7 +1,7 @@
 package main;
 
 import Atracciones.*;
-import estadisticas.GestorGastos;
+import Estadisticas.GestorGastos;
 import Persona.GestorUsuarios;
 import personal.*;
 
@@ -20,11 +20,10 @@ public class Launch{
             LOGGER.log(Level.SEVERE,getStackTrace(e));
         }
         LOGGER.log(Level.INFO,"Cargando datos...");
-        cargarDatos(); //Carga los datos serializados previamente de atracciones y clientes
+        //cargarDatos(); //Carga los datos serializados previamente de atracciones y clientes
         LOGGER.log(Level.INFO,"Se cargaron todos los datos");
         // cargarDatosEnunciado();
         // launch()
-
         guardarDatos(); //Guarda los datos de las atracciones y de los clientes
         ComprobarFecha.comprobar();
     }
@@ -54,3 +53,4 @@ public class Launch{
         guardarDatos();
     }
 }
+
