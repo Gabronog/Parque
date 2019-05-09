@@ -11,7 +11,7 @@ import static main.LOG.getStackTrace;
 import static main.LOG.inicializarLOG;
 
 public class Launch{
-    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger LOGGER = Logger.getLogger("");
 
     public static void main(String[] args) {
         try {
@@ -20,12 +20,20 @@ public class Launch{
             LOGGER.log(Level.SEVERE,getStackTrace(e));
         }
         LOGGER.log(Level.INFO,"Cargando datos...");
-        //cargarDatos(); //Carga los datos serializados previamente de atracciones y clientes
+        cargarDatos(); //Carga los datos serializados previamente de atracciones y clientes
         LOGGER.log(Level.INFO,"Se cargaron todos los datos");
         // cargarDatosEnunciado();
-        // launch()
+        launch();
         guardarDatos(); //Guarda los datos de las atracciones y de los clientes
         ComprobarFecha.comprobar();
+    }
+
+    private static void launch() {
+        try {
+            Menu.imprimirBienvenida();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void cargarDatos() {

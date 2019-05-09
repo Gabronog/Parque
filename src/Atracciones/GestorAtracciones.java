@@ -25,7 +25,9 @@ public final class GestorAtracciones implements IO {
      * @return La atraccion que buscabas
      */
     public static Atraccion obtenerDatos(int numeroAtraccion) {
-        try{return atracciones.get(numeroAtraccion);}
+        try{
+            return atracciones.get(numeroAtraccion);
+        }
         catch (IndexOutOfBoundsException ignored){
             LOGGER.warning("Llegamos al final de la lista prematuramente.");
             return null;

@@ -147,4 +147,12 @@ public abstract class Atraccion implements Serializable {
             v.setTipoAtraccion(tipoDeAtraccion);
         });
     }
+    public static int getNumeroAtracciones(){
+        if(siguientenumero!=0){
+            return siguientenumero;
+        }
+        else{
+            return 0;
+        }
+    }
 }

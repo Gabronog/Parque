@@ -25,7 +25,8 @@ public interface IO {
         } catch (
                 IOException | ClassNotFoundException| NullPointerException ioe) {
             LOGGER.severe(getStackTrace(ioe));
-            throw new IllegalStateException(ERROR + nombre);
+            LOGGER.info("Generando nuevo fichero " + nombre);
+            return new HashMap();
         }
     }
 
@@ -40,7 +41,8 @@ public interface IO {
             return temp;
         } catch (IOException | ClassNotFoundException | NullPointerException ioe) {
             LOGGER.severe(getStackTrace(ioe));
-            throw new IllegalStateException(ERROR + nombre);
+            LOGGER.info("Generando nuevo fichero " + nombre);
+            return new LinkedList();
         }
     }
 

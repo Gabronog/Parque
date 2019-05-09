@@ -1,16 +1,19 @@
-package entradas;
+package Entradas;
 
 import Persona.GestorUsuarios;
 import Persona.Persona;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.logging.Logger;
 
 
 /**
  * |entradas|
  */
 public class Entrada {
+    private static Logger LOGGER = Logger.getLogger(Entrada.class.getName());
+
     private static final double DESCUENTONINIO = 0.50;
     private LocalDate date;
     private static final int PRECIOGENERAL = 60;
@@ -48,10 +51,10 @@ public class Entrada {
                     descuento += DESCUENTOSENIOR;
                     break;
                 default:
-                    System.out.println("ERROR INDEXOUTOFRANGE TIPOPERSONA");
+                    LOGGER.severe("ERROR INDEX OUT OF RANGE TIPOPERSONA");
             }
         } else {
-            System.out.println("ERROR NOT A VALID PERSON"); //TODO log
+            LOGGER.severe("ERROR NOT A VALID PERSON");
             return -1;
         }
         if (persona.getCarnetDeDescuento() != -1) descuento += DESCUENTOCARNET;
@@ -69,13 +72,13 @@ public class Entrada {
             default:
                 throw new IllegalStateException("Unexpected value: " + calcularTemporada(date));
         }
-        if (descuento > 0.9) {
-            descuento = 0.9;
+        if (descuento > MAXDESCUENTO) {
+            descuento = MAXDESCUENTO;
         }
         if (vip) precio += PRECIOVIP;
         precio += PRECIOGENERAL;
         precio = precio * (1 - descuento);
-        return (precio / 100) * 100;
+        return precio;
     }
 
     private static Temporada calcularTemporada(LocalDate date) {
@@ -100,7 +103,7 @@ public class Entrada {
          * = DNI.     Persona.DNI    =
          * =  if(VIP) **VIP**        =
          * = Fecha    date           =
-         * = Entrada  TipoPersona    =
+         * = Entradas  TipoPersona    =
          * = Temporada TipoTemporada =
          * = if(Dis)**DISCAPACITADO**=
          * = if(Carnet) **CARNET**   =

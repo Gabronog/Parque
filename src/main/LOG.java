@@ -10,6 +10,7 @@ public interface LOG {
 
     static void inicializarLOG(Logger logger) throws IOException {
         // Con el manejador de archivo, indicamos el archivo donde se mandaran los logs
+        LogManager.getLogManager().reset();
         Handler fileHandler = new FileHandler("./LOG/Atracciones.log", false);
         // El formateador indica como presentar los datos, en este caso usaremos el formaro sencillo
         SimpleFormatter simpleFormatter = new SimpleFormatter();
