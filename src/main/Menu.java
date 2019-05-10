@@ -1,6 +1,7 @@
 package main;
 
 import Atracciones.Atraccion;
+import personal.Responsables;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,11 +9,13 @@ import java.io.InputStreamReader;
 
 import static main.DatosEnunciado.cargarDatosEnunciado;
 
-public final class Menu {
+public final class Menu{
 	public static void imprimirBienvenida() throws InterruptedException {
 		clearConsole();
 		System.out.println("        ============================================================");
+		System.out.println("        |                                                          |");
 		System.out.println("        |       Bienvenido al programa de gestion de EuroPark      |");
+		System.out.println("        |                                                          |");
 		System.out.println("        ============================================================");
 		Thread.sleep(2000);
 		clearConsole();
@@ -20,9 +23,7 @@ public final class Menu {
 	}
 
 	public static void goMenu() {
-		System.out.println("        ------------------------------------------------------------");
-		System.out.println("        |           Seleccione una opcion para continuar           |");
-		System.out.println("        ------------------------------------------------------------");
+		imprimirCabecera();
 		System.out.println("        |                                                          |");
 		System.out.println("        |         1) Gestionar Atracciones                         |");
 		System.out.println("        |         2) Gestionar Trabajadores                        |");
@@ -37,7 +38,7 @@ public final class Menu {
 			int i = Integer.parseInt(br.readLine());
 			switch (i){
 				case 1: clearConsole();
-						goAtracciones();
+						MenuAtracciones.goAtracciones();
 						break;
 				case 2: clearConsole();
 						goTrabajadores();
@@ -60,7 +61,9 @@ public final class Menu {
 							System.in.read();
 						}
 						catch(Exception e)
-						{}
+						{
+							System.err.println("Ha surgido un problema.");
+						}
 						finally {
 							clearConsole();
 						}
@@ -87,52 +90,26 @@ public final class Menu {
 	}
 
 	private static void goTrabajadores() {
-		//TODO
+		imprimirCabecera();
+		System.out.println("        |                                                          |");
+		System.out.println("        |         1) Ver numero de trabajadores por tipo           |");
+		System.out.println("        |         2) Ver total de trabajadores                     |");
+		System.out.println("        |         3) Contratar un nuevo trabajador                 |");
+		System.out.println("        |         4) Despedir un trabajador                        |");
+		System.out.println("        |         5) Asignar un trabajador a una atraccion         |");
+		System.out.println("        |         6) Desasignar un trabajador a una atraccion      |");
+		System.out.println("        |         7) Salir del programa                            |");
+		System.out.println("        ------------------------------------------------------------");
 	}
 
-	private static void goAtracciones() {
+
+
+	public static void imprimirCabecera() {
 		System.out.println("        ------------------------------------------------------------");
 		System.out.println("        |           Seleccione una opcion para continuar           |");
 		System.out.println("        ------------------------------------------------------------");
-		System.out.println("        |                                                          |");
-		System.out.println("        |         1) Ver numero de atracciones en funcionamiento   |");
-		System.out.println("        |         2) Crear una nueva atraccion                     |");
-		System.out.println("        |         3) Gestionar Entradas                            |");
-		System.out.println("        |         4) Ver estadisticas de rendimiento               |");
-		System.out.println("        |         5) Gestionar Clientes                            |");
-		System.out.println("        |         6) Salir del programa                            |");
-		System.out.println("        ------------------------------------------------------------");
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		try{
-			int i = Integer.parseInt(br.readLine());
-			switch (i){
-				case 1: clearConsole();
-					System.out.println("        " + Atraccion.getNumeroAtracciones());
-					System.out.println("        Pulsa cualquier tecla para continuar...");
-					try
-					{
-						System.in.read();
-					}
-					catch(Exception e)
-					{}
-					finally {
-						clearConsole();
-					}
-					goAtracciones();
-					break;
-				case 2: clearConsole();
-						break;
-			}
-			if(i!=6) goAtracciones();
-			else goMenu();
-		}
-		catch(NumberFormatException | IOException nfe){
-			clearConsole();
-			System.err.println("        Formato invalido!");
-			goAtracciones();
-		}
 	}
+
 	public final static void clearConsole()
 	{
 		try

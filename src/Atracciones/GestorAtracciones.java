@@ -33,7 +33,9 @@ public final class GestorAtracciones implements IO {
             return null;
         }
     }
-
+    public static int getSize(){
+        return atracciones.size();
+    }
     public static void borrar(){
         atracciones.clear();
     }

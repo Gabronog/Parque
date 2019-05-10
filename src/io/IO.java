@@ -4,8 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.logging.Logger;
-
-import static main.LOG.getStackTrace;
+import main.LOG;
 
 public interface IO {
 
@@ -24,7 +23,7 @@ public interface IO {
             return temp;
         } catch (
                 IOException | ClassNotFoundException| NullPointerException ioe) {
-            LOGGER.severe(getStackTrace(ioe));
+            LOGGER.severe(LOG.getStackTrace(ioe));
             LOGGER.info("Generando nuevo fichero " + nombre);
             return new HashMap();
         }
@@ -40,7 +39,7 @@ public interface IO {
             LOGGER.info(CARGADO + nombre + "!");
             return temp;
         } catch (IOException | ClassNotFoundException | NullPointerException ioe) {
-            LOGGER.severe(getStackTrace(ioe));
+            LOGGER.severe(LOG.getStackTrace(ioe));
             LOGGER.info("Generando nuevo fichero " + nombre);
             return new LinkedList();
         }
@@ -55,7 +54,7 @@ public interface IO {
             }
             LOGGER.info("Datos guardados correctamente en " + nombre + "!");
         } catch (IOException ioe) {
-            LOGGER.severe(getStackTrace(ioe));
+            LOGGER.severe(LOG.getStackTrace(ioe));
             throw new IllegalStateException(ERROR + nombre);
         }
     }

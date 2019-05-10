@@ -16,11 +16,11 @@ import static main.LOG.getStackTrace;
  */
 public abstract class Atraccion implements Serializable {
     boolean activada; //Controla si la atraccion esta abierta al publico o cerrada.
-    private int numeroAtraccion; //Numero de Atraccion
-    private Responsables responsable; //responsable de la atraccion
-    private HashMap<Integer, personal.Ayudantes> ayudantes; //Lista de ayudantes de la atraccion
+    public final int numeroAtraccion; //Numero de Atraccion
+    protected Responsables responsable; //responsable de la atraccion
+    protected HashMap<Integer, personal.Ayudantes> ayudantes; //Lista de ayudantes de la atraccion
     private static int siguientenumero; //Numero a asignar a la siguiente atraccion
-    private static final Logger LOGGER = Logger.getLogger(Atraccion.class.getName());
+    static final Logger LOGGER = Logger.getLogger(Atraccion.class.getName());
     /**
      * Constructor base de atracciones reutilizando un responsable ya contratado
      * @param tipoDeAtraccion Tipo de atraccion que se quiere construir
@@ -83,19 +83,6 @@ public abstract class Atraccion implements Serializable {
     public void desactivar() {
         this.activada = false;
     }
-
-    /**
-     * Activa la atracción
-     * @param nAyudantes Numero de ayudantes de la atraccion
-     */
-    public void activar(int nAyudantes) {
-        if (ayudantes.size() == nAyudantes && responsable != null) {
-            this.activada = true;
-        } else {
-            LOGGER.warning("No hay suficientes trabajadores asignados a la atracción");
-        }
-    }
-
     /**
      * Inserta un Ayudante en la atraccion
      */
@@ -155,4 +142,5 @@ public abstract class Atraccion implements Serializable {
             return 0;
         }
     }
+    public abstract Boolean activar();
 }
