@@ -16,7 +16,7 @@ public class Atencion extends Empleado implements Serializable {
         GestorPersonal.insertarEmpleado(this);
         GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) + 1);
     }
-    public int getSUELDO() {
+    public static int getSUELDO() {
         return SUELDO;
     }
 }

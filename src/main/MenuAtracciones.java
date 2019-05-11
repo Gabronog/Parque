@@ -13,18 +13,18 @@ import java.util.ArrayList;
 import static main.Menu.*;
 
 final class MenuAtracciones {
-	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	static void goAtracciones() {
 		imprimirCabecera();
-		System.out.println("        |                                                          |");
-		System.out.println("        |         1) Ver numero de atracciones en el parque        |");
-		System.out.println("        |         2) Crear una nueva atraccion                     |");
-		System.out.println("        |         3) Desactivar una atraccion                      |");
-		System.out.println("        |         4) Activar una atraccion                         |");
-		System.out.println("        |         5) Eliminar una atraccion                        |");
-		System.out.println("        |         6) Salir del programa                            |");
-		System.out.println("        ------------------------------------------------------------");
+		System.out.println("        |                                                           |");
+		System.out.println("        |         1) Ver numero de atracciones en el parque         |");
+		System.out.println("        |         2) Crear una nueva atraccion                      |");
+		System.out.println("        |         3) Desactivar una atraccion                       |");
+		System.out.println("        |         4) Activar una atraccion                          |");
+		System.out.println("        |         5) Eliminar una atraccion                         |");
+		System.out.println("        |         6) Salir del programa                             |");
+		System.out.println("        -------------------------------------------------------------");
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
@@ -82,7 +82,7 @@ final class MenuAtracciones {
 		return numeroAtraccion;
 	}
 
-	private static void anyKeyContinue() {
+	static void anyKeyContinue() {
 		System.out.println("        Pulsa cualquier tecla para continuar...");
 		try {
 			System.in.read();
@@ -94,14 +94,14 @@ final class MenuAtracciones {
 
 	static void crearAtraccion() {
 		imprimirCabecera();
-		System.out.println("        |                                                          |");
-		System.out.println("        |         1) Tipo A                                        |");
-		System.out.println("        |         2) Tipo B                                        |");
-		System.out.println("        |         3) Tipo C                                        |");
-		System.out.println("        |         4) Tipo D                                        |");
-		System.out.println("        |         5) Tipo E                                        |");
-		System.out.println("        |         6) Salir del programa                            |");
-		System.out.println("        ------------------------------------------------------------");
+		System.out.println("        |                                                           |");
+		System.out.println("        |         1) Tipo A                                         |");
+		System.out.println("        |         2) Tipo B                                         |");
+		System.out.println("        |         3) Tipo C                                         |");
+		System.out.println("        |         4) Tipo D                                         |");
+		System.out.println("        |         5) Tipo E                                         |");
+		System.out.println("        |         6) Salir del programa                             |");
+		System.out.println("        -------------------------------------------------------------");
 		try {
 			String input = "";
 			int i = Integer.parseInt(br.readLine());
@@ -113,7 +113,7 @@ final class MenuAtracciones {
 					if (!input.equals(""))
 						System.err.println("       Formato invalido introduzca S para crear un responsable o N para usar un responsable");
 					System.out.println(input);
-					System.out.println("        Crear responsable S/N");
+					System.out.println("        Contratar responsable S/N");
 					System.out.print("        >>");
 					input = br.readLine().toUpperCase();
 				}
@@ -131,34 +131,56 @@ final class MenuAtracciones {
 						dni = Integer.parseInt(br.readLine());
 					}
 				}
-
+				input = "";
+				while (!input.equals("S") && !input.equals("N")) {
+					if (!input.equals("")) System.err.println("       Formato invalido introduzca S para contratar nuevos ayudantes o N para usar ya contratados");
+					System.out.println(input);
+					System.out.println("        Contratar nuevos ayudantes S/N");
+					System.out.print("        >>");
+					input = br.readLine().toUpperCase();
+				}
+				boolean crearAyudantes;
+				if (input.equals("S")) {
+					crearAyudantes = true;
+				}
+				else crearAyudantes = false;
 			switch (i) {
 				case 1:
-					ArrayList<Ayudantes> ayudantes = ayudantes(A.NUMERO_AYUDANTE);
+					ArrayList<Ayudantes> ayudantes;
+					if(crearAyudantes) ayudantes = ayudantes(A.NUMERO_AYUDANTE);
+					else ayudantes = pedirAyudantes(A.NUMERO_AYUDANTE);
 					int n1 = new A((Responsables)GestorPersonal.obtener(dni),ayudantes).numeroAtraccion;
 					clearConsole();
 					System.out.println("        Creada la atraccion con numero " + n1);
 					break;
 				case 2:
-					ArrayList<Ayudantes> ayudantes2 = ayudantes(B.NUMERO_AYUDANTE);
+					ArrayList<Ayudantes> ayudantes2;
+					if(crearAyudantes) ayudantes2 = ayudantes(B.NUMERO_AYUDANTE);
+					else ayudantes2 = pedirAyudantes(B.NUMERO_AYUDANTE);
 					int n2 = new B((Responsables)GestorPersonal.obtener(dni),ayudantes2).numeroAtraccion;
 					clearConsole();
 					System.out.println("        Creada la atraccion con numero " + n2);
 					break;
 				case 3:
-					ArrayList<Ayudantes> ayudantes3 = ayudantes(C.NUMERO_AYUDANTE);
+					ArrayList<Ayudantes> ayudantes3;
+					if(crearAyudantes) ayudantes3 = ayudantes(C.NUMERO_AYUDANTE);
+					else ayudantes3 = pedirAyudantes(C.NUMERO_AYUDANTE);
 					int n3 = new C((Responsables)GestorPersonal.obtener(dni),ayudantes3).numeroAtraccion;
 					clearConsole();
 					System.out.println("        Creada la atraccion con numero " + n3);
 					break;
 				case 4:
-					ArrayList<Ayudantes> ayudantes4 = ayudantes(D.NUMERO_AYUDANTE);
+					ArrayList<Ayudantes> ayudantes4;
+					if(crearAyudantes) ayudantes4 = ayudantes(D.NUMERO_AYUDANTE);
+					else ayudantes4 = pedirAyudantes(D.NUMERO_AYUDANTE);
 					int n4 = new D((Responsables)GestorPersonal.obtener(dni),ayudantes4).numeroAtraccion;
 					clearConsole();
 					System.out.println("        Creada la atraccion con numero " + n4);
 					break;
 				case 5:
-					ArrayList<Ayudantes> ayudantes5 = ayudantes(E.NUMERO_AYUDANTE);
+					ArrayList<Ayudantes> ayudantes5;
+					if(crearAyudantes) ayudantes5 = ayudantes(E.NUMERO_AYUDANTE);
+					else ayudantes5 = pedirAyudantes(E.NUMERO_AYUDANTE);
 					int n = new E((Responsables)GestorPersonal.obtener(dni),ayudantes5).numeroAtraccion;
 					clearConsole();
 					System.out.println("        Creada la atraccion con numero " + n);
@@ -166,11 +188,32 @@ final class MenuAtracciones {
 			}
 			anyKeyContinue();
 			goAtracciones();
-		} catch (NumberFormatException | IOException nfe) {
+		}catch (NumberFormatException | IOException nfe) {
 			clearConsole();
 			System.err.println("        Formato invalido!");
 			crearAtraccion();
 		}
+	}
+
+	private static ArrayList<Ayudantes> pedirAyudantes(int numeroAyudante) {
+		int i = 1;
+		int dni;
+		ArrayList<Ayudantes> ayudantes = new ArrayList<>();
+		while (i <= numeroAyudante) {
+			dni=-1;
+			while(GestorPersonal.obtener(dni) != null){
+				if(dni != -1) System.out.println("       Formato invalido");
+				clearConsole();
+				System.out.println("        Por favor inserte el numero del DNI");
+				try {
+					dni = Integer.parseInt(br.readLine());
+				} catch (IOException | NumberFormatException e){
+					e.printStackTrace();
+				}
+			}
+			ayudantes.add((Ayudantes) GestorPersonal.obtener(dni));
+		}
+		return ayudantes;
 	}
 
 	private static ArrayList<Ayudantes> ayudantes(int numeroAyudante) {
@@ -195,7 +238,7 @@ final class MenuAtracciones {
 		return ayudantes;
 	}
 
-	private static int getDni() {
+	static int getDni() {
 		int dni = -1;
 		boolean validInput = false;
 		while (!validInput) {

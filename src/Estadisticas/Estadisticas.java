@@ -2,13 +2,31 @@ package Estadisticas;
 
 import personal.*;
 
-interface Estadisticas {
-    static int calcularTotalSueldo(){
+public interface Estadisticas {
+    public static int calcularTotalSueldo(){
         int totalSueldo = 0;
-        //totalSueldo += GestorPersonal.obtenerNumero("AYUDANTE") * Ayudantes.getSUELDO();
-        //totalSueldo += GestorPersonal.obtenerNumero("RESPONSABLES") * Responsables.getSUELDO();
-        //totalSueldo += GestorPersonal.obtenerNumero("ATENCION") * Atencion.getSUELDO();
-        //totalSueldo += GestorPersonal.obtenerNumero("RELACIONES") * Relaciones.getSUELDO();
+        totalSueldo += calcularAyudantes() * Ayudantes.getSUELDO();
+        totalSueldo += calcularResponsables() * Responsables.getSUELDO();
+        totalSueldo += calcularAtencion() * Atencion.getSUELDO();
+        totalSueldo += calcularRelaciones() * Relaciones.getSUELDO();
         return totalSueldo;
     }
+    public static int calcularTotalEmpleados(){
+        return calcularAyudantes() + calcularResponsables() + calcularAtencion() + calcularRelaciones();
+    }
+    public static int calcularAyudantes(){
+        return GestorPersonal.obtenerNumero("AYUDANTE");
+    }
+    public static int calcularResponsables(){
+        return GestorPersonal.obtenerNumero("RESPONSABLES");
+    }
+
+    public static int calcularAtencion(){
+        return GestorPersonal.obtenerNumero("ATENCION");
+    }
+
+    public static int calcularRelaciones(){
+        return GestorPersonal.obtenerNumero("RELACIONES");
+    }
+
 }

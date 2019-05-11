@@ -27,7 +27,7 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
         GestorPersonal.insertarNumero(nTipo, GestorPersonal.obtenerNumero(nTipo) - 1);
     }
 
-    public int getSUELDO() {
+    public static int getSUELDO() {
         return SUELDO;
     }
 }
