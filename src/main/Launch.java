@@ -13,7 +13,7 @@ import static main.LOG.getStackTrace;
 import static main.LOG.inicializarLOG;
 
 public class Launch{
-    private static final Logger LOGGER = Logger.getLogger("");
+    static final Logger LOGGER = Logger.getLogger("");
 
     public static void main(String[] args) {
         try {
@@ -33,8 +33,10 @@ public class Launch{
     private static void launch() {
         try {
             Menu.imprimirBienvenida();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.severe(getStackTrace(e));
+            System.out.println("        Ocurrio un error en la ejecucion");
+            launch();
         }
     }
 

@@ -15,7 +15,7 @@ final class Menu {
 		System.out.println("        |       Bienvenido al programa de gestion de EuroPark       |");
 		System.out.println("        |                                                           |");
 		System.out.println("        =============================================================");
-		Thread.sleep(2000);
+		Thread.sleep(800); // Wait 0.8s to make the transition smoother :)
 		MenuComun.clearConsole();
 		goMenu();
 	}

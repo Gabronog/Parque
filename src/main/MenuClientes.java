@@ -27,16 +27,16 @@ final class MenuClientes {
 				case 1:
 					Persona Cliente = getClient();
 					MenuComun.clearConsole();
-					System.out.println("        Recuperada informacion del cliente " + Cliente.getNombre() + "con dni " + Cliente.getDni());
+					System.out.println("        Recuperada informacion del cliente " + Cliente.getNombre() + " con dni " + Cliente.getDni());
 					System.out.println("        Altura: " + Cliente.getAltura());
 					System.out.println("        Edad: " + Cliente.getEdad());
 					if (Cliente.isDiscapacitado()) {
 						System.out.println("        Discapacitado");
 					} else {
-						System.out.println("      No discapacitado");
+						System.out.println("        No discapacitado");
 					}
-					if (Cliente.getCarnetDeDescuento() != 0){
-						System.out.println("Carnet de descuento: " + Cliente.getCarnetDeDescuento());
+					if (Cliente.getCarnetDeDescuento() != -1){
+						System.out.println("        Carnet de descuento: " + Cliente.getCarnetDeDescuento());
 					}
 					break;
 				case 2:
@@ -46,20 +46,30 @@ final class MenuClientes {
 					if (localDate == null) return;
 					Cliente0.comprarEntrada(vip,localDate);
 					System.out.println("Comprada entrada para el dia " + localDate.format(DateTimeFormatter.ISO_DATE));
-					MenuComun.anyKeyContinue();
 					break;
 				case 3:
 					MenuComun.clearConsole();
+					System.out.println("        Introduzca el nombre del cliente por favor");
 					String nombre = MenuComun.getName();
-					System.out.println("        Por favor introduzca su altura en cm");
-
+					int altura = getInt("        Por favor introduzca su altura en cm");
+					int edad = getInt("     Por favor introduzca su edad");
+					System.out.println("        Por favor introduzca el DNI");
+					int dni = MenuComun.getDni();
+					GestorUsuarios.insertarUsuario(dni,nombre,edad,altura);
 					break;
 				case 4:
 					MenuComun.clearConsole();
+					Persona cliente = getClient();
+					boolean carnet = MenuComun.getyesno("       Introducir un carnet de descuento S/N");
+					if(carnet) cliente.conCarnet(getInt("        Introduzca el numero de carnet por favor"));
+					if(MenuComun.getyesno("         Posee alguna minusvalia S/N")) cliente.Discapacitado();
+					System.out.println("        Actualizada la informacion correctamente");
 					break;
 			}
-			MenuComun.anyKeyContinue();
-			if (i != 5) goClientes();
+			if (i != 5){
+				MenuComun.anyKeyContinue();
+				goClientes();
+			}
 		} catch (NumberFormatException | IOException nfe) {
 			MenuComun.clearConsole();
 			System.err.println("        Formato invalido!");
@@ -67,6 +77,22 @@ final class MenuClientes {
 		}
 
 	}
+
+	private static int getInt(String s) {
+		int altura = -1;
+		while(altura<0){
+			try{
+				if(altura!=-1) System.out.println(CommonDates.error);
+				System.out.println(s);
+				altura = Integer.parseInt(br.readLine());
+			} catch (NumberFormatException |IOException e) {
+				altura = -2;
+			}
+			MenuComun.clearConsole();
+		}
+	return altura;
+	}
+
 	static Persona getClient() {
 		int dniaRecuperar = -1;
 		while (GestorUsuarios.obtenerDatos(dniaRecuperar) == null) {
@@ -76,5 +102,8 @@ final class MenuClientes {
 			dniaRecuperar = MenuComun.getDni();
 		}
 		return GestorUsuarios.obtenerDatos(dniaRecuperar);
+	}
+	private MenuClientes(){
+		Launch.LOGGER.severe("ERROR ILLEGAL STATE: LOS MENUS SON HELPERS NO DEBERIAN SER INSTANCIADOS");
 	}
 }

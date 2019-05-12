@@ -16,11 +16,9 @@ public class Persona implements Serializable {
     private TipoPersona tipoPersona;
     private boolean discapacitado = false;
     private int dni;
-    private LinkedList<Entrada> listaEntradas;
 
-    protected Persona(String Nombre, int Edad, int Altura, int dni) { //Create persons by using the GestorUsuarios Method
+    Persona(String Nombre, int Edad, int Altura, int dni) { //Create persons by using the GestorUsuarios Method
         this.nombre = Nombre;
-        this.listaEntradas = new LinkedList<>();
         this.altura = Altura;
         this.edad = Edad;
         this.dni = dni;
@@ -34,7 +32,7 @@ public class Persona implements Serializable {
     }
 
     public void comprarEntrada(boolean Vip, LocalDate date){
-        listaEntradas.add(new Entrada(this.dni,date,Vip));
+        new Entrada(this.dni,date,Vip);
     }
 
     public void conCarnet(int numero) {

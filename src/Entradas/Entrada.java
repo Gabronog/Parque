@@ -33,8 +33,8 @@ public class Entrada {
 
     public Entrada(int DNI, LocalDate date, boolean VIP) {
         this.precio = Entrada.calcularPrecio(DNI, date, VIP);
-        MesAnio mesAnio = new MesAnio(date.getMonth(),date.getYear());
-        GestorEntradas.aumentarNumeroDeEntradas(mesAnio);
+        this.persona = GestorUsuarios.obtenerDatos(DNI);
+        this.date = date;
         GestorEntradas.insertarNuevaEntrada(this,date);
     }
 
