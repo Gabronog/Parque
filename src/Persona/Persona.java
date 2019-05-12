@@ -42,7 +42,11 @@ public class Persona implements Serializable {
     }
 
     public void Discapacitado() {
-        this.discapacitado ^= true;
+        this.discapacitado ^= true; // XOR true -> false | false -> true
+    }
+
+    public int getDni(){
+    	return dni;
     }
 
     public int getEdad() {

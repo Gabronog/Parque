@@ -1,28 +1,26 @@
 package main;
 
-import Estadisticas.Estadisticas;
-import personal.GestorPersonal;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public final class Menu {
+
+final class Menu {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public static void imprimirBienvenida() throws InterruptedException {
-		clearConsole();
+	static void imprimirBienvenida() throws InterruptedException {
+		MenuComun.clearConsole();
 		System.out.println("        =============================================================");
 		System.out.println("        |                                                           |");
 		System.out.println("        |       Bienvenido al programa de gestion de EuroPark       |");
 		System.out.println("        |                                                           |");
 		System.out.println("        =============================================================");
 		Thread.sleep(2000);
-		clearConsole();
+		MenuComun.clearConsole();
 		goMenu();
 	}
 
-	public static void goMenu() {
+	static void goMenu() {
 		imprimirCabecera();
 		System.out.println("        |                                                           |");
 		System.out.println("        |         1) Gestionar Atracciones                          |");
@@ -36,49 +34,36 @@ public final class Menu {
 			int i = Integer.parseInt(br.readLine());
 			switch (i) {
 				case 1:
-					clearConsole();
+					MenuComun.clearConsole();
 					MenuAtracciones.goAtracciones();
 					break;
 				case 2:
-					clearConsole();
+					MenuComun.clearConsole();
 					MenuTrabajadores.goTrabajadores();
 					break;
 				case 3:
-					clearConsole();
-					goClientes();
+					MenuComun.clearConsole();
+					MenuClientes.goClientes();
 					break;
 				case 4:
-					clearConsole();
+					MenuComun.clearConsole();
 					goEstadisticas();
 					break;
 				case 5:
-					clearConsole();
+					MenuComun.clearConsole();
 					DatosEnunciado.cargarDatosEnunciado();
 					System.out.println("        Datos cargados correctamente.");
 					break;
 			}
-			anyKeyContinue();
+			MenuComun.anyKeyContinue();
 			if (i != 6) goMenu();
 		} catch (NumberFormatException | IOException nfe) {
-			clearConsole();
+			MenuComun.clearConsole();
 			System.err.println("        Formato invalido!");
 			goMenu();
 		}
 	}
 
-
-	private static void goClientes() {
-		imprimirCabecera();
-		System.out.println("        |                                                           |");
-		System.out.println("        |         1) Recuperar datos de un cliente                  |");
-		System.out.println("        |         2) Comprar entradas                               |");
-		System.out.println("        |         3) Crear un cliente                               |");
-		System.out.println("        |         4) Modificar datos de un cliente                  |");
-		System.out.println("        |         5) Salir del programa                             |");
-		System.out.println("        -------------------------------------------------------------");
-
-
-	}
 
 	private static void goEstadisticas() {
 		//TODO
@@ -90,32 +75,6 @@ public final class Menu {
 		System.out.println("        -------------------------------------------------------------");
 	}
 
-	public final static void clearConsole() {
-		try {
-			System.out.print("\033[H\033[2J");
-			System.out.flush();
-			final String os = System.getProperty("os.name");
-
-			if (os.contains("Windows")) {
-				Runtime.getRuntime().exec("cls");
-			} else {
-				Runtime.getRuntime().exec("clear");
-			}
-		} catch (final Exception e) {
-			//TODO
-		}
-		System.out.println("\n");
-	}
-
-	static void anyKeyContinue() {
-		System.out.println("        Pulsa cualquier tecla para continuar...");
-		try {
-			System.in.read();
-		} catch (Exception ignored) {
-		} finally {
-			clearConsole();
-		}
-	}
 
 }
 

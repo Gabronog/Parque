@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 import static main.Menu.imprimirCabecera;
 
-public class MenuTrabajadores {
+class MenuTrabajadores {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static void goTrabajadores() {
 		imprimirCabecera();
@@ -29,7 +29,7 @@ public class MenuTrabajadores {
 			int i = Integer.parseInt(br.readLine());
 			switch (i) {
 				case 1:
-					Menu.clearConsole();
+					MenuComun.clearConsole();
 					int tipoEmpleado = obtenerTipoEmpleado();
 					switch (tipoEmpleado){
 						case 1:
@@ -49,23 +49,23 @@ public class MenuTrabajadores {
 						default:
 							System.err.println("        Unexpected value: " + tipoEmpleado);
 					}
-					Menu.anyKeyContinue();
+					MenuComun.anyKeyContinue();
 					break;
 				case 2:
-					Menu.clearConsole();
+					MenuComun.clearConsole();
 					System.out.println("        El numero de trabajadores de EuroPark es: " + Estadisticas.calcularTotalEmpleados());
-					Menu.anyKeyContinue();
+					MenuComun.anyKeyContinue();
 					break;
 				case 3:
-					Menu.clearConsole();
+					MenuComun.clearConsole();
 
 					int tipoEmpleado2 = obtenerTipoEmpleado();
 					switch (tipoEmpleado2){
 						case 1:
-							MenuAtracciones.crearAyudante();
+							MenuComun.crearAyudante();
 							break;
 						case 2:
-							MenuAtracciones.crearResponsable();
+							MenuComun.crearResponsable();
 							break;
 						case 3:
 							crearAtencion();
@@ -78,38 +78,30 @@ public class MenuTrabajadores {
 						default:
 							System.err.println("        Unexpected value: " + tipoEmpleado2);
 					}
-					Menu.anyKeyContinue();
+					MenuComun.anyKeyContinue();
 					break;
 				case 4:
 					System.out.println("        Por favor introduzca el dni del empleado que quiere despedir");
-					int dni = MenuAtracciones.getDni();
+					int dni = MenuComun.getDni();
 					GestorPersonal.borrar(dni);
 					System.out.println("        Borrado del sistema el empleado con DNI " + dni);
 					break;
 				case 5:
-					Menu.clearConsole();
-					String input = "";
+					MenuComun.clearConsole();
 					int numeroAtraccion = MenuAtracciones.preguntarNumeroAtraccion();
-					while (!input.equals("S") && !input.equals("N")) {
-						if (!input.equals(""))
-							System.err.println("       Formato invalido introduzca S para crear un responsable o N para usar un responsable");
-						System.out.println(input);
-						System.out.println("        Desea contratar el ayudante S/N");
-						System.out.print("        >>");
-						input = br.readLine().toUpperCase();
-					}
+					boolean crearAyudante = MenuComun.getyesno("        Desea contratar el ayudante S/N");
 					Ayudantes ayudante;
-					if(input.equals("S")) ayudante = MenuAtracciones.crearAyudante();
-					else ayudante = (Ayudantes) GestorPersonal.obtener(MenuAtracciones.getDni());
+					if(crearAyudante) ayudante = MenuComun.crearAyudante();
+					else ayudante = (Ayudantes) GestorPersonal.obtener(MenuComun.getDni());
 					GestorAtracciones.obtenerDatos(numeroAtraccion).insertar(ayudante);
 					break;
 				case 6:
-					Menu.clearConsole();
+					MenuComun.clearConsole();
 					int numeroAtraccion2 = MenuAtracciones.preguntarNumeroAtraccion();
-					int dniDesasignar = MenuAtracciones.getDni();
+					int dniDesasignar = MenuComun.getDni();
 					GestorAtracciones.obtenerDatos(numeroAtraccion2).getDNI(dniDesasignar).dejarAtraccion();
 			}
-			Menu.clearConsole();
+			MenuComun.clearConsole();
 			if(i!=7) goTrabajadores();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -134,38 +126,28 @@ public class MenuTrabajadores {
 			}
 			return i;
 		} catch (IOException | NumberFormatException e) {
-			Menu.clearConsole();
+			MenuComun.clearConsole();
 			System.err.println("        Se produjo un error!");
 		}
 		return 0;
 	}
-	static Atencion crearAtencion() {
+	private static Atencion crearAtencion() {
 		System.out.println("        Introduzca el numero de DNI del trabajador de Atencion al cliente");
-		int dniAtencion = MenuAtracciones.getDni();
-		Menu.clearConsole();
+		int dniAtencion = MenuComun.getDni();
+		MenuComun.clearConsole();
 		System.out.println("        Por favor introduzca el nombre del trabajador con DNI " + dniAtencion);
-		String nombre = getName();
+		String nombre = MenuComun.getName();
 		System.out.println("        Creado nuevo personal de Atencion al cliente con DNI " + dniAtencion);
 		return  new Atencion(nombre, dniAtencion);
 	}
-	static Relaciones crearRelaciones() {
+	private static Relaciones crearRelaciones() {
 		System.out.println("        Introduzca el numero de DNI del trabajador de Relaciones publicas");
-		int dniAtencion = MenuAtracciones.getDni();
-		Menu.clearConsole();
+		int dniAtencion = MenuComun.getDni();
+		MenuComun.clearConsole();
 		System.out.println("        Por favor introduzca el nombre del trabajador con DNI " + dniAtencion);
-		String nombre = getName();
+		String nombre = MenuComun.getName();
 		System.out.println("        Creado nuevo personal de Relaciones Publicas con DNI " + dniAtencion);
 		return  new Relaciones(nombre, dniAtencion);
 	}
 
-	private static String getName() {
-		String nombre = null;
-		try {
-			nombre = br.readLine();
-		} catch (IOException e) {
-			System.err.println("Formato invalido introduzca un nombre valido");
-		}
-		Menu.clearConsole();
-		return nombre;
-	}
 }

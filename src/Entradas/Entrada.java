@@ -34,7 +34,8 @@ public class Entrada {
     public Entrada(int DNI, LocalDate date, boolean VIP) {
         this.precio = Entrada.calcularPrecio(DNI, date, VIP);
         MesAnio mesAnio = new MesAnio(date.getMonth(),date.getYear());
-        GestorEntradas.aumentarEntrada(mesAnio);
+        GestorEntradas.aumentarNumeroDeEntradas(mesAnio);
+        GestorEntradas.insertarNuevaEntrada(this,date);
     }
 
     private static double calcularPrecio(int dni, LocalDate date, boolean vip) {

@@ -27,6 +27,13 @@ public final class GestorGastos implements IO {
 	public static void borrar() {
 		gastos.clear();
 	}
+	public static int getGastosAnio(int anio){
+		int gastosAnio = 0;
+		for(int i=1;i<=12;i++){
+			gastosAnio += gastos.getOrDefault(new MesAnio(Month.of(i),anio),0);
+		}
+		return gastosAnio;
+	}
 
 	private GestorGastos() {
 		throw new IllegalStateException("No se pueden hacer instancias de los gestores");
