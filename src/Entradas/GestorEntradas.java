@@ -31,4 +31,14 @@ public final class GestorEntradas {
 	private GestorEntradas() {
 		throw new IllegalStateException("No se pueden hacer instancias de los gestores");
 	}
+
+	public static Entrada obtener(LocalDate date,int DNI) {
+		try{
+			return entradas.get(date.getYear()).get(date.getMonth()).get(date.getDayOfMonth()).get(DNI);
+		}
+		catch (NullPointerException nul){
+			System.out.println("        No se encuentran entradas para ese dia y ese persona");
+			return null;
+		}
+	}
 }

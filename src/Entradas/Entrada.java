@@ -4,6 +4,7 @@ import Estadisticas.MesAnio;
 import Persona.GestorUsuarios;
 import Persona.Persona;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.logging.Logger;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * |entradas|
  */
-public class Entrada {
+public class Entrada implements Serializable {
     private static Logger LOGGER = Logger.getLogger(Entrada.class.getName());
 
     private static final double DESCUENTONINIO = 0.50;
@@ -115,5 +116,9 @@ public class Entrada {
          * ===========================
          *
          */
+    }
+
+    public double getPrecio() {
+        return Math.round(this.precio*100)/100.d;
     }
 }

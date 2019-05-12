@@ -1,5 +1,6 @@
 package main;
 
+import Entradas.GestorEntradas;
 import Persona.Persona;
 
 import java.io.BufferedReader;
@@ -45,7 +46,7 @@ final class MenuClientes {
 					LocalDate localDate = CommonDates.getLocalDate();
 					if (localDate == null) return;
 					Cliente0.comprarEntrada(vip,localDate);
-					System.out.println("Comprada entrada para el dia " + localDate.format(DateTimeFormatter.ISO_DATE));
+					System.out.println("Comprada entrada por " + GestorEntradas.obtener(localDate,Cliente0.getDni()).getPrecio() + " euros para el dia " + localDate.format(DateTimeFormatter.ISO_DATE));
 					break;
 				case 3:
 					MenuComun.clearConsole();
