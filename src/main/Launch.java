@@ -1,6 +1,7 @@
 package main;
 
 import Atracciones.*;
+import Entradas.GestorEntradas;
 import Estadisticas.GestorGastos;
 import Persona.GestorUsuarios;
 import personal.*;
@@ -45,6 +46,8 @@ public class Launch{
         GestorPersonal.cargar();
         LOGGER.info("Cargando la informacion de los balances de gastos...");
         GestorGastos.cargar();
+        LOGGER.info("Cargando la informacion de las entradas...");
+        GestorEntradas.cargar();
     }
 
     private static void guardarDatos() {
@@ -52,12 +55,17 @@ public class Launch{
         GestorUsuarios.guardar();
         GestorPersonal.guardar();
         GestorGastos.guardar();
+        GestorEntradas.guardar();
+        LOGGER.info("Guardados todos los datos correctamente");
     }
 
     static void borrarDatos(){
         GestorAtracciones.borrar();
         GestorUsuarios.borrar();
         GestorPersonal.borrar();
+        GestorEntradas.borrar();
+        GestorGastos.borrar();
+        LOGGER.info("Borrados todos los datos");
         guardarDatos();
     }
 }

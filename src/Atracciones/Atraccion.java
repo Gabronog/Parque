@@ -86,7 +86,7 @@ public abstract class Atraccion implements Serializable {
     /**
      * Inserta un Ayudante en la atraccion
      */
-    void insertar(Ayudantes ayudante) {
+    public void insertar(Ayudantes ayudante) {
         if (-1 == ayudante.getTipoAtraccion() || -1 == ayudante.getNumeroDeAtraccion()) GestorPersonal.borrar(ayudante.getDni());
         else ayudante.dejarAtraccion();
         this.ayudantes.put(ayudante.getDni(), ayudante);
@@ -133,14 +133,6 @@ public abstract class Atraccion implements Serializable {
             v.setNumeroDeAtraccion(this.numeroAtraccion);
             v.setTipoAtraccion(tipoDeAtraccion);
         });
-    }
-    public static int getNumeroAtracciones(){
-        if(siguientenumero!=0){
-            return siguientenumero;
-        }
-        else{
-            return 0;
-        }
     }
     public abstract Boolean activar();
 }

@@ -1,76 +1,87 @@
 package Persona;
 
+import Entradas.Entrada;
+
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.LinkedList;
 
 import static Persona.TipoPersona.*;
 
 public class Persona implements Serializable {
-    private int Edad;
-    private String Nombre;
-    private int Altura;
-    private int CarnetDeDescuento = -1;
-    private TipoPersona Tipopersona;
-    private boolean Discapacitado = false;
+    private int edad;
+    private String nombre;
+    private int altura;
+    private int carnetDeDescuento = -1;
+    private TipoPersona tipoPersona;
+    private boolean discapacitado = false;
+    private int dni;
+    private LinkedList<Entrada> listaEntradas;
 
-
-    public Persona(String Nombre, int Edad, int Altura) {
-        this.Nombre = Nombre;
-        this.Altura = Altura;
-        this.Edad = Edad;
-        if (12 >= this.Edad) {
-            this.Tipopersona = Ninio;
-        } else if (65 >= this.Edad) {
-            this.Tipopersona = Adulto;
+    protected Persona(String Nombre, int Edad, int Altura, int dni) { //Create persons by using the GestorUsuarios Method
+        this.nombre = Nombre;
+        this.listaEntradas = new LinkedList<>();
+        this.altura = Altura;
+        this.edad = Edad;
+        this.dni = dni;
+        if (12 >= this.edad) {
+            this.tipoPersona = Ninio;
+        } else if (65 >= this.edad) {
+            this.tipoPersona = Adulto;
         } else {
-            this.Tipopersona = Senior;
+            this.tipoPersona = Senior;
         }
     }
 
+    public void comprarEntrada(boolean Vip, LocalDate date){
+        listaEntradas.add(new Entrada(this.dni,date,Vip));
+    }
+
     public void conCarnet(int numero) {
-        this.CarnetDeDescuento = numero;
+        this.carnetDeDescuento = numero;
     }
 
     public void Discapacitado() {
-        this.Discapacitado ^= true;
+        this.discapacitado ^= true;
     }
 
     public int getEdad() {
-        return Edad;
+        return edad;
     }
 
     public void setEdad(int edad) {
-        Edad = edad;
+        this.edad = edad;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public int getAltura() {
-        return Altura;
+        return altura;
     }
 
     public void setAltura(int altura) {
-        Altura = altura;
+        this.altura = altura;
     }
 
-    public TipoPersona getTipopersona() {
-        return Tipopersona;
+    public TipoPersona getTipoPersona() {
+        return tipoPersona;
     }
 
-    public void setTipopersona(TipoPersona tipopersona) {
-        Tipopersona = tipopersona;
+    public void setTipoPersona(TipoPersona tipoPersona) {
+        this.tipoPersona = tipoPersona;
     }
 
     public int getCarnetDeDescuento() {
-        return CarnetDeDescuento;
+        return carnetDeDescuento;
     }
 
     public boolean isDiscapacitado() {
-        return Discapacitado;
+        return discapacitado;
     }
 }

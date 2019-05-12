@@ -29,7 +29,7 @@ public abstract class TrabajadorDeAtraccion extends Empleado {
 
 
     public void dejarAtraccion() {
-        TrabajadorDeAtraccion trabajador = (TrabajadorDeAtraccion) GestorAtracciones.obtenerDatos(numeroDeAtraccion).getDNI(this.getDni());
+        TrabajadorDeAtraccion trabajador = GestorAtracciones.obtenerDatos(numeroDeAtraccion).getDNI(this.getDni());
         if ((-1 != trabajador.getNumeroDeAtraccion())
                 && (-1 != trabajador.getTipoAtraccion())) {
             GestorAtracciones.obtenerDatos(numeroDeAtraccion).desactivar();

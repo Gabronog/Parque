@@ -1,7 +1,7 @@
 package main;
 
 import Estadisticas.GestorGastos;
-import Estadisticas.GestorGastos.MesAnio;
+import Estadisticas.MesAnio;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ interface ComprobarFecha {
             LOGGER.info("-Hoy es final de mes, guardando los gastos de este mes-");
         }
         //No es final de mes
-        System.out.println("NO FINAL DE MES");
+        LOGGER.info("NO FINAL DE MES");
     }
 
 

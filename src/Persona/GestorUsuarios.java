@@ -13,7 +13,7 @@ public final class GestorUsuarios implements IO{
     private static final Logger LOGGER = Logger.getLogger(GestorUsuarios.class.getName());
 
     public static void insertarUsuario(int dni, String nombre, int edad, int altura) {
-        usuarios.put(dni, new Persona(nombre, edad, altura));
+        usuarios.put(dni, new Persona(nombre, edad, altura,dni));
     }
 
     public static Persona obtenerDatos(int dni) {

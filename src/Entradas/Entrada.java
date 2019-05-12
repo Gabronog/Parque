@@ -1,5 +1,6 @@
 package Entradas;
 
+import Estadisticas.MesAnio;
 import Persona.GestorUsuarios;
 import Persona.Persona;
 
@@ -32,6 +33,8 @@ public class Entrada {
 
     public Entrada(int DNI, LocalDate date, boolean VIP) {
         this.precio = Entrada.calcularPrecio(DNI, date, VIP);
+        MesAnio mesAnio = new MesAnio(date.getMonth(),date.getYear());
+        GestorEntradas.aumentarEntrada(mesAnio);
     }
 
     private static double calcularPrecio(int dni, LocalDate date, boolean vip) {
@@ -40,7 +43,7 @@ public class Entrada {
         precio = descuento = 0;
         Persona persona = GestorUsuarios.obtenerDatos(dni);
         if (persona != null) {
-            switch (persona.getTipopersona()) {
+            switch (persona.getTipoPersona()) {
                 case Ninio:
                     descuento += DESCUENTONINIO;
                     break;
