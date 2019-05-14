@@ -59,7 +59,7 @@ public class A extends Atraccion implements Serializable {
 				//Guardamos la atraccion en nuestra lista
 				LOGGER.info("Creada la atraccion tipo A correctamente");
 			}
-		} else{
+		} else {
 			LOGGER.severe("ARRAY LENGTH ERROR");
 			System.out.println("Se produjo un error al asignar los ayudantes a la atraccion");
 		}
@@ -85,6 +85,7 @@ public class A extends Atraccion implements Serializable {
 		//Guardamos la atraccion en nuestra lista
 		GestorAtracciones.add(this);
 	}
+
 	/**
 	 * Activa la atracción
 	 */

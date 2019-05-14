@@ -46,7 +46,7 @@ public final class CommonDates {
 		return day;
 	}
 
-	private static int getMaxDayOfMonth(boolean bisiesto, Month month1) {
+	public static int getMaxDayOfMonth(boolean bisiesto, Month month1) {
 		int maxDay = -1;
 		switch (month1){
 			case JANUARY:

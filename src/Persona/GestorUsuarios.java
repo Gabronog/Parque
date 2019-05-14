@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 
-public final class GestorUsuarios implements IO{
+public final class GestorUsuarios extends IO{
 
     private static final String ARCHIVO = "DATA/Clientes";
     private static HashMap<Integer, Persona> usuarios = new HashMap<>();
@@ -29,15 +29,15 @@ public final class GestorUsuarios implements IO{
         usuarios.clear();
     }
 
-    public static void guardar() {
-        IO.guardar(ARCHIVO, usuarios);
+    public static void save() {
+        guardar(ARCHIVO, usuarios);
     }
     private GestorUsuarios(){
         LOGGER.info("NO SE PUEDEN INSTACIAR LOS GESTORES USE SUS METODOS ESTATICOS");
     }
 
-    public static void cargar() {
-        usuarios = (HashMap<Integer, Persona>) IO.cargar(ARCHIVO);
+    public static void load() {
+        usuarios = (HashMap<Integer, Persona>) cargar(ARCHIVO);
     }
 }
 

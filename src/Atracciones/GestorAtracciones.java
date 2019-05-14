@@ -5,7 +5,7 @@ import io.IO;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
-public final class GestorAtracciones implements IO {
+public final class GestorAtracciones extends IO {
 
     private static final String ARCHIVO = "DATA/atracciones";
     private static LinkedList<Atraccion> atracciones = new LinkedList<>();
@@ -40,12 +40,12 @@ public final class GestorAtracciones implements IO {
         atracciones.clear();
     }
 
-    public static void guardar() {
-        IO.guardar(ARCHIVO, atracciones);
+    public static void save() {
+        guardar(ARCHIVO, atracciones);
     }
 
-    public static void cargar() {
-        atracciones = IO.cargarLista(ARCHIVO);
+    public static void load() {
+        atracciones = cargarLista(ARCHIVO);
     }
 
     public static void add(Atraccion atraccion) {

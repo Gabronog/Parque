@@ -26,6 +26,21 @@ final class MenuComun {
 		return dni;
 	}
 
+	static int getInt(String s) {
+		int number = -1;
+		while (number < 0) {
+			try {
+				if (number != -1) System.out.println(CommonDates.error);
+				System.out.println(s);
+				number = Integer.parseInt(br.readLine());
+			} catch (NumberFormatException | IOException e) {
+				number = -2;
+			}
+			MenuComun.clearConsole();
+		}
+		return number;
+	}
+
 	static Responsables crearResponsable() {
 		System.out.println("        Introduzca el numero de DNI del responsable de la atraccion");
 		int dniResponsable = getDni();
@@ -63,6 +78,7 @@ final class MenuComun {
 		}
 		return input.equals("S");
 	}
+
 	static void anyKeyContinue() {
 		System.out.println("        Pulsa cualquier tecla para continuar...");
 		try {
@@ -77,10 +93,12 @@ final class MenuComun {
 		String nombre = null;
 		try {
 			nombre = br.readLine();
-		} catch (IOException ignored){}
+		} catch (IOException ignored) {
+		}
 		clearConsole();
 		return nombre;
 	}
+
 	public final static void clearConsole() {
 		try {
 			System.out.print("\033[H\033[2J");

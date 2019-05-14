@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import static main.LOG.getStackTrace;
 
-public final class GestorPersonal implements IO{
+public final class GestorPersonal extends IO{
     /**
      * Gestor de personal no asignado a una atraccion
      * Guarda tanto el personal no asignado a una atraccion como el numero de empleados
@@ -57,14 +57,14 @@ public final class GestorPersonal implements IO{
         LOGGER.info("NO SE PUEDEN INSTANCIAR LOS METODOS ESTATICOS POR FAVOR USE SUS METODOS ESTATICOS");
     }
 
-    public static void guardar() {
-        IO.guardar(ARCHIVO, empleados);
-        IO.guardar(ARCHIVO2, nPersonal);
+    public static void save() {
+        guardar(ARCHIVO, empleados);
+        guardar(ARCHIVO2, nPersonal);
     }
 
-    public static void cargar() {
-        empleados = (HashMap<Integer, Empleado>) IO.cargar(ARCHIVO);
-        nPersonal = (HashMap<String, Integer>) IO.cargar(ARCHIVO2);
+    public static void load() {
+        empleados = (HashMap<Integer, Empleado>) cargar(ARCHIVO);
+        nPersonal = (HashMap<String, Integer>) cargar(ARCHIVO2);
     }
 
 }

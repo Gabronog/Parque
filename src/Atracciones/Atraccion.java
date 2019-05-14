@@ -27,24 +27,24 @@ public abstract class Atraccion implements Serializable {
      * @param responsable Responsable al que asignar a la atraccion
      */
     Atraccion(int tipoDeAtraccion, Responsables responsable) {
-        numeroAtraccion = siguientenumero;
-        siguientenumero++;
-        ayudantes = new HashMap<>();
-        this.responsable = responsable;
+        numeroAtraccion = siguientenumero; //Aumentamos el numero de atraccion
+        siguientenumero++; // Aumentamos siguiente numero de atraccion para la siguiente atraccion
+        ayudantes = new HashMap<>(); // Inicializamos el hashmap
+        this.responsable = responsable; // Asignamos el responsable
         if (this.responsable.getNumeroDeAtraccion() != -1 && this.responsable.getTipoAtraccion() != -1) {
-            //El responsable esta trabajando una atraccion ya
+            //El responsable esta trabajando una atraccion ya?
             //Desactivamos la atraccion que estaba trabajando antes de asignarlo a esta
             try {
                 LOGGER.info(String.format("Desactivando la atraccion %d debido a la incorporacion del trabajador con DNI %d " +
                         "en la atraccion %d", responsable.getNumeroDeAtraccion(), responsable.getDni(), this.numeroAtraccion));
-                GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).activada = false;
-                GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).responsable = null;
+                GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).activada = false; //La atraccion en la que trabajaba ya no esta activada
+                GestorAtracciones.obtenerDatos(responsable.getNumeroDeAtraccion()).responsable = null;//La atraccion en la que trabajaba ya no tiene responsable
                 LOGGER.log(Level.INFO,"Desactivada...");
             }catch(NullPointerException n){
                 LOGGER.severe(getStackTrace(n));
             }
         } else {
-            GestorPersonal.borrar(responsable.getDni());
+            GestorPersonal.borrar(responsable.getDni());//Borramos del gestor de personal sin atraccion
         }
         setResponsable(this.responsable, tipoDeAtraccion, numeroAtraccion);
     }
@@ -72,17 +72,11 @@ public abstract class Atraccion implements Serializable {
      */
     private void setResponsable(Responsables responsable, int tipoDeAtraccion, int numeroAtraccion) {
         if (null != responsable) {
-            responsable.setTipoAtraccion(tipoDeAtraccion);
-            responsable.setNumeroDeAtraccion(numeroAtraccion);
+            responsable.setTipoAtraccion(tipoDeAtraccion); //Asignamos el tipo de atraccion
+            responsable.setNumeroDeAtraccion(numeroAtraccion); //Asignamos el numero de atraccion
         }
     }
 
-    /**
-     * Desactiva la atracción
-     */
-    public void desactivar() {
-        this.activada = false;
-    }
     /**
      * Inserta un Ayudante en la atraccion
      */
@@ -113,11 +107,16 @@ public abstract class Atraccion implements Serializable {
     }
 
     /**
-     * Borra un trabajador de la atraccion
+     * Borra un ayudante de la atraccion
      * @param dni dni
      */
     public void delete(int dni) {
         ayudantes.remove(dni);
+        if(this.activada) this.desactivar();
+    }
+    public void delete(){
+        this.responsable = null;
+        if(this.activada) this.desactivar();
     }
 
     /**
@@ -134,5 +133,16 @@ public abstract class Atraccion implements Serializable {
             v.setTipoAtraccion(tipoDeAtraccion);
         });
     }
+
+    /**
+     * Activa la atraccion
+     * @return Devuelve un boolean de si ha podido ser activada o no
+     */
     public abstract Boolean activar();
+    /**
+     * Desactiva la atracción
+     */
+    public void desactivar() {
+        this.activada = false;
+    }
 }

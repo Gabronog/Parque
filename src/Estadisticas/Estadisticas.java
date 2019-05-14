@@ -1,9 +1,10 @@
 package Estadisticas;
 
+import main.CommonDates;
 import personal.*;
 
-public interface Estadisticas {
-    public static int calcularTotalSueldo(){
+public final class Estadisticas {
+    static int calcularTotalSueldo(){
         int totalSueldo = 0;
         totalSueldo += calcularAyudantes() * Ayudantes.getSUELDO();
         totalSueldo += calcularResponsables() * Responsables.getSUELDO();

@@ -47,7 +47,7 @@ final class Menu {
 					break;
 				case 4:
 					MenuComun.clearConsole();
-					goEstadisticas();
+					MenuEstadisticas.goEstadisticas();
 					break;
 				case 5:
 					MenuComun.clearConsole();
@@ -64,10 +64,6 @@ final class Menu {
 		}
 	}
 
-
-	private static void goEstadisticas() {
-		//TODO
-	}
 
 	public static void imprimirCabecera() {
 		System.out.println("        -------------------------------------------------------------");

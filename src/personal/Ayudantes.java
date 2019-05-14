@@ -1,5 +1,7 @@
 package personal;
 
+import Atracciones.GestorAtracciones;
+
 import java.io.Serializable;
 
 public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
@@ -29,5 +31,19 @@ public class Ayudantes extends TrabajadorDeAtraccion implements Serializable {
 
     public static int getSUELDO() {
         return SUELDO;
+    }
+
+    @Override
+    public void dejarAtraccion(){
+        if ((-1 != this.getNumeroDeAtraccion())
+                && (-1 != this.getTipoAtraccion())) {
+            GestorAtracciones.obtenerDatos(this.numeroDeAtraccion).desactivar();
+            GestorAtracciones.obtenerDatos(this.numeroDeAtraccion).delete(this.getDni());
+            this.setTipoAtraccion(-1);
+            this.setNumeroDeAtraccion(-1);
+            GestorPersonal.insertarEmpleado(this);
+        } else {
+            System.out.println("El trabajador no estaba trabajando ninguna atraccion");
+        }
     }
 }

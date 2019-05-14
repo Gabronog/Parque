@@ -1,31 +1,36 @@
 package Estadisticas;
 
 import io.IO;
+import main.CommonDates;
 
 import java.time.Month;
+import java.time.Year;
 import java.util.HashMap;
 
 import static Estadisticas.Estadisticas.calcularTotalSueldo;
 
 
-public final class GestorGastos implements IO {
+public final class GestorGastos extends IO {
 	private static final String ARCHIVO = "DATA/gastos";
 	private static HashMap<MesAnio, Integer> gastos = new HashMap<>();
 
 	public static void nuevoBalance(MesAnio a) {
-		gastos.put(a, calcularTotalSueldo());
+		gastos.put(a, calcularTotalSueldo() * CommonDates.getMaxDayOfMonth(Year.of(a.getAnio()).isLeap(),a.getMes()));
 	}
 
-	public static void guardar() {
-		IO.guardar(ARCHIVO, gastos);
+	public static void save() {
+		guardar(ARCHIVO, gastos);
 	}
 
-	public static void cargar() {
-		gastos = (HashMap<MesAnio, Integer>) IO.cargar(ARCHIVO);
+	public static void load() {
+		gastos = (HashMap<MesAnio, Integer>) cargar(ARCHIVO);
 	}
 
 	public static void borrar() {
 		gastos.clear();
+	}
+	public static int getGastos(MesAnio mesAnio){
+		return gastos.getOrDefault(mesAnio,0);
 	}
 	public static int getGastosAnio(int anio){
 		int gastosAnio = 0;

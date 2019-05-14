@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import Persona.GestorUsuarios;
 
 final class MenuClientes {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
 	static void goClientes() {
 		Menu.imprimirCabecera();
 		System.out.println("        |                                                           |");
@@ -36,7 +38,7 @@ final class MenuClientes {
 					} else {
 						System.out.println("        No discapacitado");
 					}
-					if (Cliente.getCarnetDeDescuento() != -1){
+					if (Cliente.getCarnetDeDescuento() != -1) {
 						System.out.println("        Carnet de descuento: " + Cliente.getCarnetDeDescuento());
 					}
 					break;
@@ -45,29 +47,29 @@ final class MenuClientes {
 					boolean vip = MenuComun.getyesno("      Entrada VIP S/N?");
 					LocalDate localDate = CommonDates.getLocalDate();
 					if (localDate == null) return;
-					Cliente0.comprarEntrada(vip,localDate);
-					System.out.println("Comprada entrada por " + GestorEntradas.obtener(localDate,Cliente0.getDni()).getPrecio() + " euros para el dia " + localDate.format(DateTimeFormatter.ISO_DATE));
+					Cliente0.comprarEntrada(vip, localDate);
+					System.out.println("Comprada entrada por " + GestorEntradas.obtener(localDate, Cliente0.getDni()).getPrecio() + " euros para el dia " + localDate.format(DateTimeFormatter.ISO_DATE));
 					break;
 				case 3:
 					MenuComun.clearConsole();
 					System.out.println("        Introduzca el nombre del cliente por favor");
 					String nombre = MenuComun.getName();
-					int altura = getInt("        Por favor introduzca su altura en cm");
-					int edad = getInt("     Por favor introduzca su edad");
+					int altura = MenuComun.getInt("        Por favor introduzca su altura en cm");
+					int edad = MenuComun.getInt("     Por favor introduzca su edad");
 					System.out.println("        Por favor introduzca el DNI");
 					int dni = MenuComun.getDni();
-					GestorUsuarios.insertarUsuario(dni,nombre,edad,altura);
+					GestorUsuarios.insertarUsuario(dni, nombre, edad, altura);
 					break;
 				case 4:
 					MenuComun.clearConsole();
 					Persona cliente = getClient();
 					boolean carnet = MenuComun.getyesno("       Introducir un carnet de descuento S/N");
-					if(carnet) cliente.conCarnet(getInt("        Introduzca el numero de carnet por favor"));
-					if(MenuComun.getyesno("         Posee alguna minusvalia S/N")) cliente.Discapacitado();
+					if (carnet) cliente.conCarnet(MenuComun.getInt("        Introduzca el numero de carnet por favor"));
+					if (MenuComun.getyesno("         Posee alguna minusvalia S/N")) cliente.Discapacitado();
 					System.out.println("        Actualizada la informacion correctamente");
 					break;
 			}
-			if (i != 5){
+			if (i != 5) {
 				MenuComun.anyKeyContinue();
 				goClientes();
 			}
@@ -79,32 +81,18 @@ final class MenuClientes {
 
 	}
 
-	private static int getInt(String s) {
-		int altura = -1;
-		while(altura<0){
-			try{
-				if(altura!=-1) System.out.println(CommonDates.error);
-				System.out.println(s);
-				altura = Integer.parseInt(br.readLine());
-			} catch (NumberFormatException |IOException e) {
-				altura = -2;
-			}
-			MenuComun.clearConsole();
-		}
-	return altura;
-	}
-
 	static Persona getClient() {
 		int dniaRecuperar = -1;
 		while (GestorUsuarios.obtenerDatos(dniaRecuperar) == null) {
 			MenuComun.clearConsole();
-			if(dniaRecuperar!=-1) System.out.println("      No se encuentra un cliente con ese dni");
+			if (dniaRecuperar != -1) System.out.println("      No se encuentra un cliente con ese dni");
 			System.out.println("        Por favor introduzca el dni del usuario a recuperar");
 			dniaRecuperar = MenuComun.getDni();
 		}
 		return GestorUsuarios.obtenerDatos(dniaRecuperar);
 	}
-	private MenuClientes(){
+
+	private MenuClientes() {
 		Launch.LOGGER.severe("ERROR ILLEGAL STATE: LOS MENUS SON HELPERS NO DEBERIAN SER INSTANCIADOS");
 	}
 }

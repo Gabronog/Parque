@@ -1,8 +1,9 @@
 package Estadisticas;
 
+import java.io.Serializable;
 import java.time.Month;
 
-public class MesAnio {
+public class MesAnio implements Serializable {
 	private Month mes;
 	private int anio;
 	public MesAnio(Month month, int year){
